@@ -1,0 +1,100 @@
+[
+    {
+        "title":"Delivery Controller SDK",
+        "description":"XenApp and XenDesktop provide an SDK based on a number of Microsoft Windows PowerShell version 3.0 snap-ins that allows you to perform the same tasks as you would with the Citrix Studio console, together with tasks you cannot do with Studio alone.",
+        "link":"https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest/",
+        "active":true,
+        "versiontext":"Version 7.11"
+    },
+    {
+        "title":"Citrix Receiver for HTML5 SDK",
+        "description":"Use the Citrix Receiver for HTML5 SDK to enhance support for HDX sessions and to build a rich app experience in your Enterprise portals with the Receiver for HTML5.",
+        "link":"https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"AppDNA SDK",
+        "description":"The AppDNA SDK enables you to provide AppDNA within a process or user interface that your users are familiar with, or within a simple web page. These topics introduce the AppDNA software development kit (SDK), describe what data is available, and how to develop using the AppDNA SDK.",
+        "link":"https://developer-docs.citrix.com/projects/appdna-sdk/en/latest/",
+        "active":true,
+        "versiontext":"Version 7.13"
+    },
+    {
+        "title":"XenServer SDK",
+        "description":"Reference guide for Citrix XenServer SDK",
+        "link":"https://developer-docs.citrix.com/projects/xenserver-sdk/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"Monitor Service OData API",
+        "description":"Reference guide for the Monitor Service OData API",
+        "link":"https://developer-docs.citrix.com/projects/monitor-service-odata-api/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"StoreFront SDK",
+        "description":"The Citrix StoreFront Web API and SDK are programming interfaces to Citrix StoreFront services.",
+        "link":"https://developer-docs.citrix.com/projects/storefront-sdk/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"Provisioning Services SOAP Server Programmer's Guide",
+        "description":"Use Provisioning Services' SOAP Server programming interface to manage your implementation from a command line or from scripts.",
+        "link":"https://developer-docs.citrix.com/projects/provisioning-services-sdk/en/latest/",
+        "active":true,
+        "versiontext":"Version 7.12"
+    },
+    {
+	      "title":"Citrix XenServer Management API",
+	      "description":"The Citrix XenServer Management API is an API for remotely configuring and controlling virtualised guests running on a XenServer pool.",
+	      "link":"https://developer-docs.citrix.com/projects/xenserver-management-api/en/latest/",
+	      "active":true,
+	      "versiontext":"Version 7.0"
+    },
+    {
+        "title":"Citrix Virtual Channel SDK for Android",
+        "description":"The Citrix Virtual Channel Software Development Kit (SDK) provides support for writing server-side applications and client-side drivers for additional virtual channels using the ICA protocol.",
+        "link":"https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"Fast Connect 3 Credential Insertion API for Citrix Receiver for Windows",
+        "description":"The Fast Connect 3 Credential Insertion API provides an interface that supplies user credentials to the single sign-on (SSO) feature of Citrix Receiver for Windows 4.2 and later.",
+        "link":"https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"Citrix Virtual Channel SDK for Windows",
+        "description":"The Citrix Virtual Channel Software Development Kit (SDK) provides support for writing server-side applications and client-side drivers for additional virtual channels using the ICA protocol.",
+        "link":"https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest/",
+        "active":true,
+        "versiontext":""
+    },
+    {
+        "title":"Citrix Virtual Channel SDK for Citrix Receiver for Linux",
+        "description":"The Citrix Virtual Channel Software Development Kit (SDK) provides support for writing server-side applications and client-side drivers for additional virtual channels using the ICA protocol.",
+        "link":"https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/13.6/",
+        "active":true,
+        "versiontext":"Version 13.6"
+    },
+    {
+	"title":"Command Reference for Citrix Receiver for Linux",
+	"description":"Command-line reference and parameters for Citrix Recevier for Linux 13.5",
+	"link":"https://developer-docs.citrix.com/projects/receiver-for-linux-command-reference/en/latest/",
+	"active":true,
+	"versiontext":"Version 13.5"
+    },
+    {
+	"title":"Additional SDK Documentation",
+	"description":"Additional SDK documentation",
+	"link":"https://developer-docs.citrix.com",
+	"active":true,
+	"versiontext":""
+    }
+]

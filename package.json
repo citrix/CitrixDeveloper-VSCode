@@ -1,0 +1,81 @@
+{
+    "name": "citrixdeveloper-vscode",
+    "displayName": "Citrix Developer tools for Visual Studio Code",
+    "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
+    "version": "0.5.0",
+    "publisher": "Citrix Systems, Inc",
+    "contributors": [
+        "John McBride"
+    ],
+    "homepage": "http://developer.citrix.com",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/citrix/CitrixDeveloper-VSCode.git"
+    },
+    "engines": {
+        "vscode": "^1.17.0"
+    },
+    "categories": [
+        "Other","Snippets"
+    ],
+    "activationEvents": [
+        "onView:citrix.view.sdkdocs"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "views": {
+            "explorer": [
+                {
+                    "id": "citrix.view.sdkdocs",
+                    "name": "Citrix SDK Documentation"
+                }
+            ]
+        },
+        "commands":[
+            {
+                "command": "citrix.commands.openCitrixDeveloperSite",
+                "title": "Open Developer Site",
+                "icon":{
+                    "light": "media/devsite-light.svg",
+                    "dark": "media/devsite-dark.svg"
+                }
+            },
+            {
+                "command": "citrix.commands.openCitrixDeveloperFeedbackSite",
+                "title": "Give us feedback!",
+                "icon":{
+                    "light": "media/feedback-light.svg",
+                    "dark": "media/feedback-dark.svg"
+                }
+            }
+        ],
+        "menus": {
+            "view/title": [
+                {
+                    "command": "citrix.commands.openCitrixDeveloperSite",
+                    "group": "navigation",
+                    "when": "view==citrix.view.sdkdocs"
+                },
+                {
+                    "command": "citrix.commands.openCitrixDeveloperFeedbackSite",
+                    "group": "navigation",
+                    "when": "view==citrix.view.sdkdocs"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5",
+        "mocha": "^3.5.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
