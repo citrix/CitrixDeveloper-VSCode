@@ -7,6 +7,10 @@
     "contributors": [
         "John McBride"
     ],
+    "icon": "./media/citrix-32x32-blackonwhite.png",
+    "galleryBanner": {
+        "color": "#1879B9"
+    },
     "homepage": "http://developer.citrix.com",
     "repository": {
         "type": "git",
