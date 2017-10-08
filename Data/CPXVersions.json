@@ -1,0 +1,14 @@
+[
+    {
+        "label":"v12.0",
+        "location":"store/citrix/netscalercpx:12.0-41.16",
+        "description":"Netscaler CPX load balancer",
+        "version": "12.0"
+    },
+    {
+        "label":"v11.0",
+        "location":"store/citrix/netscalercpx:11.1-53.11",
+        "description":"Netscaler CPX load balancer",
+        "version": "11.0"        
+    }
+]
