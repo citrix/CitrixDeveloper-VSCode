@@ -51,6 +51,22 @@
                     "light": "media/feedback-light.svg",
                     "dark": "media/feedback-dark.svg"
                 }
+            },
+            {
+                "command": "citrix.commands.downloadcpxcontainer",
+                "category": "Citrix",
+                "title": "Download Netscaler CPX image (Docker)"
+            }
+            ,
+            {
+                "command": "citrix.commands.startcpxcontainer",
+                "category": "Citrix",
+                "title": "Start Netscaler CPX image (Docker)"
+            },
+            {
+                "command": "citrix.commands.stopcpxcontainer",
+                "category": "Citrix",
+                "title": "Stop Netscaler CPX image (Docker)"
             }
         ],
         "menus": {
