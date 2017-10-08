@@ -25,7 +25,19 @@ export function activate(context: vscode.ExtensionContext) {
         
         const uri = vscode.Uri.parse(SDKLink);
         vscode.commands.executeCommand('vscode.open', uri);
-	});
+    });
+    
+    let downloadCPXImageCmd = vscode.commands.registerCommand('citrix.commands.downloadcpxcontainer', () => {
+        //download container from docker store.
+    });
+
+    let startCPXContainerCmd = vscode.commands.registerCommand('citrix.commands.startcpxcontainer', () => {
+        //start cpx container
+    });
+
+    let stopCPXContainerCmd = vscode.commands.registerCommand('citrix.commands.stopcpxcontainer', () => {
+        //stop cpx container.
+    });
 
     context.subscriptions.push(openDeveloperSiteCmd);
     context.subscriptions.push(openDeveloperFeedbackSiteCmd);
