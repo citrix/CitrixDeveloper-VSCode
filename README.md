@@ -23,6 +23,7 @@ While this initial release in limited in features, the extension will support sa
  - [ ] Samples for Storefront SDK
  - [ ] Samples for XenApp/XenDesktop Powershell
  - [ ] Samples for Netscaler SDK
+ - [ ] Add github samples to the new explorer view and give the user the ability to clone repo directly from the UI.
 
 ## Using the extension
 
