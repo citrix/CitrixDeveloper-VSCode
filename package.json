@@ -3,11 +3,11 @@
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
     "version": "0.5.0",
-    "publisher": "Citrix Developer",
+    "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
     ],
-    "icon": "./media/citrix-32x32-blackonwhite.png",
+    "icon": "images/citrixicon.png",
     "galleryBanner": {
         "color": "#1879B9"
     },
