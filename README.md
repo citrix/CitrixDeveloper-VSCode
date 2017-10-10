@@ -1,5 +1,7 @@
 # Citrix Developer tools for Visual Studio Code
 
+[![Join the chat at https://gitter.im/citrix/CitrixDeveloper-VSCode](https://badges.gitter.im/citrix/CitrixDeveloper-VSCode.svg)](https://gitter.im/citrix/CitrixDeveloper-VSCode?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Citrix Developer tools for Visual Studio Code is an extension that helps developers build applications that target the Citrix platform by adding Samples, code snippets and SDK documentation to the IDE.
 
 ![Main Window View](images/mainview.png)
