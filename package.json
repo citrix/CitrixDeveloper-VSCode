@@ -20,7 +20,8 @@
         "vscode": "^1.17.0"
     },
     "categories": [
-        "Other","Snippets"
+        "Other",
+        "Snippets"
     ],
     "activationEvents": [
         "onView:citrix.view.sdkdocs"
@@ -35,11 +36,11 @@
                 }
             ]
         },
-        "commands":[
+        "commands": [
             {
                 "command": "citrix.commands.openCitrixDeveloperSite",
                 "title": "Open Developer Site",
-                "icon":{
+                "icon": {
                     "light": "media/devsite-light.svg",
                     "dark": "media/devsite-dark.svg"
                 }
@@ -47,7 +48,7 @@
             {
                 "command": "citrix.commands.openCitrixDeveloperFeedbackSite",
                 "title": "Give us feedback!",
-                "icon":{
+                "icon": {
                     "light": "media/feedback-light.svg",
                     "dark": "media/feedback-dark.svg"
                 }
@@ -56,8 +57,7 @@
                 "command": "citrix.commands.downloadcpxcontainer",
                 "category": "Citrix",
                 "title": "Download Netscaler CPX image (Docker)"
-            }
-            ,
+            },
             {
                 "command": "citrix.commands.startcpxcontainer",
                 "category": "Citrix",
@@ -97,5 +97,8 @@
         "mocha": "^3.5.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "dockerode": "^2.5.1"
     }
 }
