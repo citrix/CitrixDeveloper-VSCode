@@ -5,7 +5,8 @@ import * as vscode from 'vscode';
 import { SDKProvider } from './Providers/SDKProvider';
 import {Uri} from 'vscode';
 import fs = require("fs");
-import { CPXItem } from './Interfaces/CPXItem';
+import { CPXItem } from './Model/CPXItem';
+import * as Helpers from './helpers/docker';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -29,40 +30,125 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.executeCommand('vscode.open', uri);
     });
     
-    let downloadCPXImageCmd = vscode.commands.registerCommand('citrix.commands.downloadcpxcontainer', () => {
+    let downloadCPXImageCmd = vscode.commands.registerCommand('citrix.commands.downloadcpxcontainer', async () => {
         //check to see if the user has docker installed. We try and execute docker
         //and parse the result.
-
-        //load up the cpx versions and locations from the data file.
-        let cpxDataFilePath = context.asAbsolutePath("Data/CPXVersions.json");
-        console.log(cpxDataFilePath);
-        let cpxJSON = fs.readFileSync(cpxDataFilePath,'utf-8');
-
-        // parsing the json string into an array of ICPX objects
-        let imageList: Array<CPXItem> = JSON.parse(cpxJSON);
-        console.log(imageList);
-
-        //prompt the user for the version they would like to download?
-        if ( imageList.length > 1 )
+        
+        let dockerAvailable = await Helpers.isDockerAvailable();
+        if ( dockerAvailable == false )
         {
-            vscode.window.showQuickPick(imageList).then( (output ) => {
-                console.log('selected ' + output.version);
-                console.log('selected ' + output.location);
-
-                const terminal: vscode.Terminal = vscode.window.createTerminal('Docker');
-                terminal.sendText(`docker pull ${output.location}`);
-                terminal.show();
-            });
+            vscode.window.showErrorMessage("Unable to connect to the Docker daemon. Please make sure docker is installed and running.");
         }
+        else
+        {
+            //load up the cpx versions and locations from the data file.
+            let cpxDataFilePath = context.asAbsolutePath("Data/CPXVersions.json");
+            console.log(cpxDataFilePath);
+            let cpxJSON = fs.readFileSync(cpxDataFilePath,'utf-8');
 
+            // parsing the json string into an array of ICPX objects
+            let imageList: Array<CPXItem> = JSON.parse(cpxJSON);
+            console.log(imageList);
+
+            //prompt the user for the version they would like to download?
+            if ( imageList.length > 1 )
+            {
+                vscode.window.showQuickPick(imageList).then( (output ) => {
+                    vscode.window.showInformationMessage("Downloading Netscaler image");
+                    const terminal: vscode.Terminal = vscode.window.createTerminal('Docker');
+                    terminal.sendText(`docker pull ${output.location}`);
+                    terminal.show();
+                });
+            }
+        }
     });
 
-    let startCPXContainerCmd = vscode.commands.registerCommand('citrix.commands.startcpxcontainer', () => {
+    let startCPXContainerCmd = vscode.commands.registerCommand('citrix.commands.startcpxcontainer',  async () => {
         //start cpx container
+        //ask for user input (http port, https port, ssh)
+        if ( await Helpers.isDockerAvailable() == true )
+        {
+            let installedImages = await Helpers.listCitrixImages();
+            if (installedImages.length == 0 )
+            {
+                vscode.window.showErrorMessage("The Netscaler CPX image is not installed in this instance of Docker. Pleae use the 'Citrix:Download Netscaler CPX image (Docker)' command to download the image, then try again");
+            }
+            else
+            {
+                let ports = new Array<string>();
+                vscode.window.showQuickPick(installedImages).then( (selectedImage) => {
+                    console.log(selectedImage);
+                    vscode.window.showInputBox({prompt:"Enter local HTTP port", value: "32777"}).then( (httpValue) => {
+                        console.log(httpValue);
+                        ports.push(`80:tcp:${httpValue}`);
+                        vscode.window.showInputBox({prompt:"Enter local HTTPS port", value: "32778"}).then( (httpsValue) => {
+                            console.log(httpsValue);
+                            ports.push(`443:tcp:${httpsValue}`);
+                            vscode.window.showInputBox({prompt:"Enter local SSH port", value: "32779"}).then( (sshValue) => {
+                                console.log(sshValue);
+                                ports.push(`22:tcp:${sshValue}`);
+                                vscode.window.showInputBox({prompt:"Enter local SNMP port", value: "32780"}).then( async (snmpValue) => {
+                                    console.log(snmpValue);
+                                    ports.push(`161:upd:${snmpValue}`);
+                                    if ( sshValue != "" && httpsValue != "" && httpValue != "" && snmpValue)
+                                    {
+                                        if ( await Helpers.isDockerAvailable() )
+                                        {
+                                            let isStarted = await Helpers.startContainer(selectedImage.label,ports)
+                                            if ( isStarted )
+                                            {
+                                                vscode.window.showInformationMessage("Netscaler CPX container started.");
+                                            }
+                                            else
+                                            {
+                                                vscode.window.showErrorMessage("Unable to start the netscaler CPX container.");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            vscode.window.showErrorMessage("Unable to connect to the Docker daemon. Please make sure docker is installed and running.");
+                                        }
+                                    }
+                                })    
+                            });
+                        });
+                    });
+                });
+            }
+        }
     });
 
-    let stopCPXContainerCmd = vscode.commands.registerCommand('citrix.commands.stopcpxcontainer', () => {
-        //stop cpx container.
+    let stopCPXContainerCmd = vscode.commands.registerCommand('citrix.commands.stopcpxcontainer', async () => {
+        if ( await Helpers.isDockerAvailable() )
+        {
+            //stop cpx container.
+            let pickableContainers = await Helpers.listRunningCitrixContainers();
+            console.log(pickableContainers);
+            if ( pickableContainers.length > 0)
+            {
+                vscode.window.showQuickPick(pickableContainers).then( async (output ) => {
+                    vscode.window.showInformationMessage(`Stopping container ${output.id}`);
+                    let isStopped = await Helpers.stopContainer(output.id);
+                    if ( isStopped)
+                    {
+                        vscode.window.showInformationMessage(`Removing container ${output.name}`);
+                        let isRemoved = await Helpers.removeContainer(output.id);
+                        if ( isRemoved)
+                        {
+                            vscode.window.showInformationMessage(`Removed container ${output.name}`);
+                        }
+                    }
+                    else
+                    {
+                        vscode.window.showErrorMessage(`Error stopping container ${output.name}`);
+                    }
+                });
+            }
+        }
+        else
+        {
+            vscode.window.showErrorMessage("Unable to connect to the Docker daemon. Please make sure docker is installed and running.");
+        }
     });
 
     context.subscriptions.push(openDeveloperSiteCmd);
