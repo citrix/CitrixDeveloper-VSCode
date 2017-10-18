@@ -12,7 +12,7 @@ While this initial release in limited in features, the extension will support sa
  - [x] Explorer view to list SDK Documentation
  - [x] Icon on view for developer.citrix.com site
  - [x] Icon on view for  User feedback using UserVoice
- - [x] Add Citrix commands to command palette to pull/start/stop netscaler CPX container from docker store
+ - [x] Added Citrix commands to command palette to pull/start/stop netscaler CPX container from docker store
 
 ### On Roadmap
  - [ ] Provide samples integration into the command pallet
