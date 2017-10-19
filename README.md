@@ -25,7 +25,7 @@ While this initial release in limited in features, the extension will support sa
  - [ ] Samples for XenApp/XenDesktop Powershell
  - [ ] Samples for Netscaler SDK
  - [ ] Add github samples to the new explorer view and give the user the ability to clone repo directly from the UI.
- - [] Merge Github and SDK Document into a single treeview for the developer explorer.
+ - [ ] Merge Github and SDK Document into a single treeview for the developer explorer.
 
 ## Using the extension
 
@@ -40,7 +40,7 @@ We are always interested in your feedback. You can either use our github issues 
  - Snippet not available yet.
 
 ### 0.6.0
-Added Citrix Netscaler commands to the command palette for pulling/starting/stoping Netscaler CPX images.
+Added Citrix Netscaler commands to the command palette for pulling/starting/stopping Netscaler CPX images.
 ### 0.5.0
 Initial release of Citrix Developer Extension for Visual Studio Code.
 
