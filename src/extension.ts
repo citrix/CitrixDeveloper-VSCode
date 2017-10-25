@@ -7,6 +7,7 @@ import fs = require("fs");
 import { CPXItem } from './QuickPickItems/CPXItem';
 import * as Helpers from './helpers/docker';
 import { CitrixDeveloperProvider } from './Providers/CitrixDeveloperProvider';
+import { dirname } from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -35,30 +36,60 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let cloneAndOpenRepo = vscode.commands.registerCommand('citrix.commands.context.clone', RepoInfo => {
-        vscode.window.showInputBox({prompt:"Enter location to clone repo:"}).then( (location) => {
-            console.log(location);
-            console.log(RepoInfo);
-            console.log(RepoInfo.Project.cloneURL);
+        const config = vscode.workspace.getConfiguration('citrixdeveloper');
+        const baseCloneDir: string = config.get<string>('gitclonebasedirectory',"");
+        console.log(baseCloneDir);
 
-            if ( location != null )
+        vscode.window.showInputBox({prompt:"Enter location to clone repo:", value: baseCloneDir}).then( (location) => {
+            if ( location != "" )
             {
+                if ( !location.endsWith("/"))
+                {
+                    location += "/";
+                }
+ 
+                //save the config
+                try
+                {
+                    config.update('gitclonebasedirectory',location);
+                }
+                catch ( configSaveError )
+                {
+                    console.log(configSaveError);
+                }
+                let projectUrl:string = RepoInfo.Project.projectURL;
+                if ( projectUrl.endsWith("/"))
+                {
+                    //remove trailing slash
+                    projectUrl = projectUrl.substring(0,projectUrl.length -1 );
+                }
+                let slashLoc = projectUrl.lastIndexOf("/");
+                let dirName = projectUrl.substring(slashLoc + 1);
+
+                let cloneLocation = location + dirName;
+                console.log(dirName);
                 //clone url
                 const cdTerminal: vscode.Terminal = vscode.window.createTerminal('Citrix-Developer');
-                cdTerminal.sendText(`cd ${location}`);
-                cdTerminal.sendText(`git clone ${RepoInfo.Project.cloneURL}`);
+                cdTerminal.sendText(`git clone ${RepoInfo.Project.cloneURL} ${cloneLocation}`);
                 cdTerminal.show();
 
             }
         });
-        console.log("Clone REPO");
     });
 
     let openGithubRepo = vscode.commands.registerCommand('citrix.commands.context.openghsite', RepoInfo => {
-        console.log("open REPO site");
+        const uri = vscode.Uri.parse(RepoInfo.Project.projectURL);
+        vscode.commands.executeCommand('vscode.open', uri);
     });
 
     let openGithubProjectSite = vscode.commands.registerCommand('citrix.commands.context.openprojectsite', RepoInfo => {
-        console.log("open REPO project Site");
+        const uri = vscode.Uri.parse(RepoInfo.Project.prettySite);
+        vscode.commands.executeCommand('vscode.open', uri);
+    });
+
+    let openGithubProjectIssues = vscode.commands.registerCommand('citrix.commands.context.openprojectissues', RepoInfo => {
+        const uri = vscode.Uri.parse(RepoInfo.Project.projectURL + "/issues");
+        vscode.commands.executeCommand('vscode.open', uri);
     });
 
     let downloadCPXImageCmd = vscode.commands.registerCommand('citrix.commands.downloadcpxcontainer', async () => {
