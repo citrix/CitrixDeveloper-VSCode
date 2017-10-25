@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -21,18 +21,31 @@
     },
     "categories": [
         "Other",
-        "Snippets"
+        "Snippets",
+        "Extension Packs"
     ],
     "activationEvents": [
-        "onView:citrix.view.sdkdocs"
+        "onView:citrix.view.citrixdeveloper"
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "configuration":[
+            {
+                "title": "Citrix Developer Configuration",
+                "properties": {
+                    "citrixdeveloper.gitclonebasedirectory": {
+                        "type":"string",
+                        "default":"",
+                        "description": "Base directory when cloning Citrix open source GitHub repositories"
+                    }
+                }
+            }
+        ],
         "views": {
             "explorer": [
                 {
-                    "id": "citrix.view.sdkdocs",
-                    "name": "Citrix SDK Documentation"
+                    "id": "citrix.view.citrixdeveloper",
+                    "name": "Citrix Developer"
                 }
             ]
         },
@@ -67,6 +80,26 @@
                 "command": "citrix.commands.stopcpxcontainer",
                 "category": "Citrix",
                 "title": "Stop Netscaler CPX image (Docker)"
+            },
+            {
+                "command": "citrix.commands.context.clone",
+                "title": "Clone and open repo"
+            },
+            {
+                "command": "citrix.commands.context.openghsite",
+                "title": "Goto GitHub site",
+                "icon": {
+                    "light": "media/githubmark-light.png",
+                    "dark": "media/githubmark-dark.png"
+                }
+            },
+            {
+                "command": "citrix.commands.context.openprojectsite",
+                "title": "Goto project site"
+            },
+            {
+                "command": "citrix.commands.context.openprojectissues",
+                "title": "Goto Github Issues"
             }
         ],
         "menus": {
@@ -74,13 +107,37 @@
                 {
                     "command": "citrix.commands.openCitrixDeveloperSite",
                     "group": "navigation",
-                    "when": "view==citrix.view.sdkdocs"
+                    "when": "view==citrix.view.citrixdeveloper"
                 },
                 {
                     "command": "citrix.commands.openCitrixDeveloperFeedbackSite",
                     "group": "navigation",
-                    "when": "view==citrix.view.sdkdocs"
+                    "when": "view==citrix.view.citrixdeveloper"
                 }
+            ],
+            "view/item/context": [
+                {
+                    "command": "citrix.commands.context.clone",
+                    "group": "citrixGithubContext",
+                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                },
+                {
+                    "command": "citrix.commands.context.openghsite",
+                    "group": "citrixGithubContext",
+                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                },
+                {
+                    "command": "citrix.commands.context.openprojectsite",
+                    "group": "citrixGithubContext",
+                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                },
+                {
+                    "command": "citrix.commands.context.openprojectissues",
+                    "group": "citrixGithubContext",
+                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                    
+                }
+
             ]
         }
     },
