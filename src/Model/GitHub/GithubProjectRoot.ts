@@ -37,7 +37,7 @@ export class GithubProjectRoot implements INode {
 
         projectList.forEach(element => {
             let project = new GithubProject(
-                element.title,element.description, element.projectURL,element.cloneURL
+                element.title,element.description, element.projectURL,element.cloneURL, element.prettySite
             );
             projects.push(new GithubProjectNode(project,this.context));
         });
