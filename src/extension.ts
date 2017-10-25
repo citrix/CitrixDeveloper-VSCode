@@ -2,17 +2,21 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { SDKProvider } from './Providers/SDKProvider';
 import {Uri} from 'vscode';
 import fs = require("fs");
-import { CPXItem } from './Model/CPXItem';
+import { CPXItem } from './QuickPickItems/CPXItem';
 import * as Helpers from './helpers/docker';
+import { CitrixDeveloperProvider } from './Providers/CitrixDeveloperProvider';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    const sdkProvider = new SDKProvider(context);
-    vscode.window.registerTreeDataProvider('citrix.view.sdkdocs',sdkProvider);
+    //const sdkProvider = new SDKProvider(context);
+
+    const devProvider = new CitrixDeveloperProvider(context);
+
+    //vscode.window.registerTreeDataProvider('citrix.view.sdkdocs',sdkProvider);
+    vscode.window.registerTreeDataProvider('citrix.view.citrixdeveloper',devProvider);
 
     let openDeveloperSiteCmd = vscode.commands.registerCommand("citrix.commands.openCitrixDeveloperSite", () => {
         const uri = vscode.Uri.parse("http://developer.citrix.com");
@@ -29,7 +33,34 @@ export function activate(context: vscode.ExtensionContext) {
         const uri = vscode.Uri.parse(SDKLink);
         vscode.commands.executeCommand('vscode.open', uri);
     });
-    
+
+    let cloneAndOpenRepo = vscode.commands.registerCommand('citrix.commands.context.clone', RepoInfo => {
+        vscode.window.showInputBox({prompt:"Enter location to clone repo:"}).then( (location) => {
+            console.log(location);
+            console.log(RepoInfo);
+            console.log(RepoInfo.Project.cloneURL);
+
+            if ( location != null )
+            {
+                //clone url
+                const cdTerminal: vscode.Terminal = vscode.window.createTerminal('Citrix-Developer');
+                cdTerminal.sendText(`cd ${location}`);
+                cdTerminal.sendText(`git clone ${RepoInfo.Project.cloneURL}`);
+                cdTerminal.show();
+
+            }
+        });
+        console.log("Clone REPO");
+    });
+
+    let openGithubRepo = vscode.commands.registerCommand('citrix.commands.context.openghsite', RepoInfo => {
+        console.log("open REPO site");
+    });
+
+    let openGithubProjectSite = vscode.commands.registerCommand('citrix.commands.context.openprojectsite', RepoInfo => {
+        console.log("open REPO project Site");
+    });
+
     let downloadCPXImageCmd = vscode.commands.registerCommand('citrix.commands.downloadcpxcontainer', async () => {
         //check to see if the user has docker installed. We try and execute docker
         //and parse the result.
