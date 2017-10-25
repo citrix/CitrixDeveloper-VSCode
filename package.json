@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -21,13 +21,26 @@
     },
     "categories": [
         "Other",
-        "Snippets"
+        "Snippets",
+        "Extension Packs"
     ],
     "activationEvents": [
         "onView:citrix.view.citrixdeveloper"
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "configuration":[
+            {
+                "title": "Citrix Developer Configuration",
+                "properties": {
+                    "citrixdeveloper.gitclonebasedirectory": {
+                        "type":"string",
+                        "default":"",
+                        "description": "Base directory when cloning Citrix open source GitHub repositories"
+                    }
+                }
+            }
+        ],
         "views": {
             "explorer": [
                 {
@@ -74,7 +87,7 @@
             },
             {
                 "command": "citrix.commands.context.openghsite",
-                "title": "Goto github site",
+                "title": "Goto GitHub site",
                 "icon": {
                     "light": "media/githubmark-light.png",
                     "dark": "media/githubmark-dark.png"
@@ -83,6 +96,10 @@
             {
                 "command": "citrix.commands.context.openprojectsite",
                 "title": "Goto project site"
+            },
+            {
+                "command": "citrix.commands.context.openprojectissues",
+                "title": "Goto Github Issues"
             }
         ],
         "menus": {
@@ -113,6 +130,12 @@
                     "command": "citrix.commands.context.openprojectsite",
                     "group": "citrixGithubContext",
                     "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                },
+                {
+                    "command": "citrix.commands.context.openprojectissues",
+                    "group": "citrixGithubContext",
+                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                    
                 }
 
             ]
