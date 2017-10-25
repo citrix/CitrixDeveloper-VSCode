@@ -1,5 +1,5 @@
-import {DockerImage} from '../Model/DockerImage';
-import {Container} from '../Model/Container';
+import {DockerImage} from '../QuickPickItems/DockerImage';
+import {Container} from '../QuickPickItems/Container';
 
 var Docker = require('dockerode');
 
