@@ -7,16 +7,13 @@ import fs = require("fs");
 import { CPXItem } from './QuickPickItems/CPXItem';
 import * as Helpers from './helpers/docker';
 import { CitrixDeveloperProvider } from './Providers/CitrixDeveloperProvider';
-import { dirname } from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    //const sdkProvider = new SDKProvider(context);
 
     const devProvider = new CitrixDeveloperProvider(context);
 
-    //vscode.window.registerTreeDataProvider('citrix.view.sdkdocs',sdkProvider);
     vscode.window.registerTreeDataProvider('citrix.view.citrixdeveloper',devProvider);
 
     let openDeveloperSiteCmd = vscode.commands.registerCommand("citrix.commands.openCitrixDeveloperSite", () => {
@@ -36,18 +33,33 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     let cloneAndOpenRepo = vscode.commands.registerCommand('citrix.commands.context.clone', RepoInfo => {
+        //get the config options for citrixdeveloper
         const config = vscode.workspace.getConfiguration('citrixdeveloper');
-        const baseCloneDir: string = config.get<string>('gitclonebasedirectory',"");
-        console.log(baseCloneDir);
+        //grab the clone directory that might be saved in the workspace settings.
+        var baseCloneDir: string = config.get<string>('gitclonebasedirectory',"");
+        //if nothing has been saved from previous clones, then set the base clone
+        //dir to the users home directory.
+        if ( baseCloneDir == "")
+        {
+            baseCloneDir = process.env.HOME;
+        }
 
+        //prompt the user for the location to clone the repo. This defaults to
+        //the users home directory if they have not entered a setting before.
         vscode.window.showInputBox({prompt:"Enter location to clone repo:", value: baseCloneDir}).then( (location) => {
-            if ( location != "" )
+            if ( location != "" && location != null )
             {
+                //validate our path ends with the right slashes
                 if ( !location.endsWith("/"))
                 {
                     location += "/";
                 }
- 
+                //if the user has entered a ~ in the path, replace this with
+                //their home directory
+                if ( location.indexOf('~') > -1 )
+                {
+                    location = location.replace('~', process.env.HOME);
+                }     
                 //save the config
                 try
                 {
@@ -55,24 +67,29 @@ export function activate(context: vscode.ExtensionContext) {
                 }
                 catch ( configSaveError )
                 {
+                    //print out the error message
                     console.log(configSaveError);
                 }
+                //get the project url from the object passed into the command event
                 let projectUrl:string = RepoInfo.Project.projectURL;
+
                 if ( projectUrl.endsWith("/"))
                 {
                     //remove trailing slash
                     projectUrl = projectUrl.substring(0,projectUrl.length -1 );
                 }
+
                 let slashLoc = projectUrl.lastIndexOf("/");
                 let dirName = projectUrl.substring(slashLoc + 1);
 
                 let cloneLocation = location + dirName;
-                console.log(dirName);
-                //clone url
-                const cdTerminal: vscode.Terminal = vscode.window.createTerminal('Citrix-Developer');
-                cdTerminal.sendText(`git clone ${RepoInfo.Project.cloneURL} ${cloneLocation}`);
-                cdTerminal.show();
 
+                var clone = require('git-clone');
+                clone(RepoInfo.Project.cloneURL, cloneLocation,'', () => {
+                    //once repo is cloned, open the folder in a new instance of vcode.
+                    let uri = Uri.parse(`file://${cloneLocation}`);
+                    let success = vscode.commands.executeCommand('vscode.openFolder', uri);
+                });
             }
         });
     });
