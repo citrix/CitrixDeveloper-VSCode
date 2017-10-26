@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "0.7.0",
+    "version": "0.7.1",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -29,13 +29,13 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
-        "configuration":[
+        "configuration": [
             {
                 "title": "Citrix Developer Configuration",
                 "properties": {
                     "citrixdeveloper.gitclonebasedirectory": {
-                        "type":"string",
-                        "default":"",
+                        "type": "string",
+                        "default": "",
                         "description": "Base directory when cloning Citrix open source GitHub repositories"
                     }
                 }
@@ -135,9 +135,7 @@
                     "command": "citrix.commands.context.openprojectissues",
                     "group": "citrixGithubContext",
                     "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
-                    
                 }
-
             ]
         }
     },
@@ -156,6 +154,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "dockerode": "^2.5.1"
+        "dockerode": "^2.5.1",
+        "git-clone": "^0.1.0"
     }
 }
