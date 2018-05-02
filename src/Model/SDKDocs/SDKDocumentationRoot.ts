@@ -6,7 +6,7 @@ import { SDKDocumentNode } from './SDKDocumentNode';
 import { SDKDocument } from './SDKDocument';
 import fs = require("fs");
 import { ISDKDoc } from '../../Interfaces/ISDKDoc';
-
+import { SDKDocumentSubPage} from '../SDKDocs/SDKDocumentSubPage';
 export class SDKDocumentationRoot implements INode {
 
     constructor(private context: vscode.ExtensionContext) {
@@ -37,7 +37,16 @@ export class SDKDocumentationRoot implements INode {
         // then add it to the SDK Document List
 
         docList.forEach(element => {
-            let doc = new SDKDocument(element.title,element.link)
+            let subpages = new Array<SDKDocumentSubPage>();
+     
+            //load sub pages
+            element.pages.forEach( page => {
+                var subpage = new SDKDocumentSubPage(page.pagetitle,page.pagelink);
+                subpages.push(subpage);
+            });
+
+            let doc = new SDKDocument(element.sdktitle,element.sdkmainurl,subpages)
+            
             sdkList.push(new SDKDocumentNode(doc, this.context));
         });
 
