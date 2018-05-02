@@ -18,8 +18,6 @@ export class CitrixDeveloperProvider implements vscode.TreeDataProvider<INode > 
             console.log("!element");
             return this.getRootNodes();
         }
-        console.log("element");
-        console.log(element);
         
         return element.getChildren();
     }
