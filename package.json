@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "0.7.1",
+    "version": "1.0.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"

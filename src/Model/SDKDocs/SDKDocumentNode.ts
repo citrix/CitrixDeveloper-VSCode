@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import { INode } from '../../Interfaces/INode';
 import { SDKDocument } from './SDKDocument';
+import { SDKDocumentSubNode } from './SDKDocumentSubNode';
+import { SDKDocumentSubPage } from './SDKDocumentSubPage';
 
 export class SDKDocumentNode implements INode {
 
@@ -25,11 +27,25 @@ export class SDKDocumentNode implements INode {
                 command: 'citrix.opensdkdocument',
                 arguments: [this.SDKDoc.link],
                 title:''
-            }
+            },
+            collapsibleState: vscode.TreeItemCollapsibleState.Collapsed
         }
     }
     getChildren(): INode[] | Promise<INode[]> {
-        return [];
+        return this.getSubPages();
+    }
+    public async getSubPages() : Promise<SDKDocumentSubNode[]>
+    {
+        const pages = [];
+
+        this.SDKDoc.subpages.forEach( page => 
+        {
+            var subPage = new SDKDocumentSubPage(page.label,page.link);
+            var subPageNode = new SDKDocumentSubNode(subPage,this.context);
+            pages.push(subPageNode)
+        });
+
+        return pages;
     }
    
 
