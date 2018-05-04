@@ -16,6 +16,71 @@ export function activate(context: vscode.ExtensionContext) {
 
     vscode.window.registerTreeDataProvider('citrix.view.citrixdeveloper',devProvider);
 
+    let downloadNetCoreDockerSample = vscode.commands.registerCommand("citrix.commands.downloaddockersfsample", () => {
+        const terminal: vscode.Terminal = vscode.window.createTerminal('Docker');
+        terminal.show();
+        terminal.sendText(`docker run -d -p 5000:5000 citrixdeveloper/citrix-storefront-apidemo`);
+    });
+    let downloadNetCoreSample = vscode.commands.registerCommand("citrix.commands.downloadnetcoresfsample", () => {
+        const config = vscode.workspace.getConfiguration('citrixdeveloper');
+        //grab the clone directory that might be saved in the workspace settings.
+        var baseCloneDir: string = config.get<string>('gitclonebasedirectory',"");
+        //if nothing has been saved from previous clones, then set the base clone
+        //dir to the users home directory.
+        if ( baseCloneDir == "")
+        {
+            baseCloneDir = process.env.HOME;
+        }
+        //prompt the user for the location to clone the repo. This defaults to
+       //the users home directory if they have not entered a setting before.
+       vscode.window.showInputBox({prompt:"Enter location to clone repo:", value: baseCloneDir}).then( (location) => {
+            if ( location != "" && location != null )
+            {
+                //validate our path ends with the right slashes
+                if ( !location.endsWith("/"))
+                {
+                    location += "/";
+                }
+                //if the user has entered a ~ in the path, replace this with
+                //their home directory
+                if ( location.indexOf('~') > -1 )
+                {
+                    location = location.replace('~', process.env.HOME);
+                }     
+                //save the config
+                try
+                {
+                    config.update('gitclonebasedirectory',location);
+                }
+                catch ( configSaveError )
+                {
+                    //print out the error message
+                    console.log(configSaveError);
+                }
+                //get the project url from the object passed into the command event
+                let projectUrl:string = "https://github.com/citrix/StorefrontSample-netcore";
+
+                if ( projectUrl.endsWith("/"))
+                {
+                    //remove trailing slash
+                    projectUrl = projectUrl.substring(0,projectUrl.length -1 );
+                }
+
+                let slashLoc = projectUrl.lastIndexOf("/");
+                let dirName = projectUrl.substring(slashLoc + 1);
+
+                let cloneLocation = location + dirName;
+
+                var clone = require('git-clone');
+                clone("https://github.com/citrix/StorefrontSample-netcore.git", cloneLocation,'', () => {
+                    //once repo is cloned, open the folder in a new instance of vcode.
+                    let uri = Uri.parse(`file://${cloneLocation}`);
+                    let success = vscode.commands.executeCommand('vscode.openFolder', uri);
+                });
+            }
+        }); 
+    });
+
     let openDeveloperSiteCmd = vscode.commands.registerCommand("citrix.commands.openCitrixDeveloperSite", () => {
         const uri = vscode.Uri.parse("http://developer.citrix.com");
         vscode.commands.executeCommand('vscode.open', uri);
