@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -65,6 +65,16 @@
                     "light": "media/feedback-light.svg",
                     "dark": "media/feedback-dark.svg"
                 }
+            },
+            {
+                "command": "citrix.commands.downloaddockersfsample",
+                "category": "Citrix",
+                "title": "Sample: Download/Start .NET Storefront Docker Sample"
+            },
+            {
+                "command": "citrix.commands.downloadnetcoresfsample",
+                "category": "Citrix",
+                "title": "Sample: Download .NET Core Storefront Sample"
             },
             {
                 "command": "citrix.commands.downloadcpxcontainer",
