@@ -19,10 +19,7 @@ export class GithubProjectProvider implements vscode.TreeDataProvider<GithubProj
         {
             sdkElements = this.getRootGithubProjectNodes();
         }
-        else
-        {
-            //sdkElements = this.getGithubChildNodes(element.doc);
-        }
+        
         return sdkElements;
     }
 
@@ -58,50 +55,16 @@ export class GithubProjectProvider implements vscode.TreeDataProvider<GithubProj
             githubProject.prettySite = element.prettySite;
 
             let githubProjectNode = new GithubProjectNode();
-            // if ( sdkdoc.children.length > 0 )
-            // {
-            //     sdkdocnode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
-            // }
-            // else
-            // {
-            //     sdkdocnode.collapsibleState = vscode.TreeItemCollapsibleState.None;
-            // }
             
             githubProjectNode.label = element.title;
-            //sdkdocnode.doc = sdkdoc;
             githubProjectNode.iconPath = {
             light: this.context.asAbsolutePath("media/githubmark-light.png"),
             dark: this.context.asAbsolutePath("media/githubmark-dark.png")
             };
-            //sdkdocnode.command = { command:'citrix.opensdkdocument',arguments:[sdkdoc.url],title:''};
             
             githubProjects.push(githubProjectNode);            
         });
 
         return githubProjects;
-    } //getRootDocumentationNodes
-
-    private getChildDocumentationNodes(githubproject: GithubProject)
-    {
-        // let childNodes = Array<SDKDocumentNode>();
-
-        // sdkdoc.children.forEach(element => {
-        //     let sdkChildDoc = new SDKDocument(element.title,element.url,[]);
-        //     let sdkChildNode = new SDKDocumentNode();
-        //     sdkChildNode.collapsibleState = vscode.TreeItemCollapsibleState.None;
-        //     sdkChildNode.context = this.context;
-        //     sdkChildNode.doc = sdkChildDoc;
-        //     sdkChildNode.label = element.title;
-        //     sdkChildNode.iconPath = {
-        //         light: this.context.asAbsolutePath("media/SDKLine-light.svg"),
-        //         dark: this.context.asAbsolutePath("media/SDKLine-dark.svg")
-        //         };
-            
-        //     sdkChildNode.command = { command:'citrix.opensdkdocument',arguments:[element.url],title:''};
-            
-        //     childNodes.push(sdkChildNode);
-        // });
-
-        return []; //childNodes;
-    }
+    } //getRootGithubProjectNodes
 } 
