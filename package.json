@@ -25,7 +25,8 @@
         "Extension Packs"
     ],
     "activationEvents": [
-        "onView:citrix.view.citrix-sdk-documentation"
+        "onView:citrix.view.citrix-sdk-documentation",
+        "onView:citrix.view.citrix-github-explorer"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -146,22 +147,22 @@
                 {
                     "command": "citrix.commands.context.clone",
                     "group": "citrixGithubContext",
-                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                    "when": "view == citrix.view.citrix-github-explorer"
                 },
                 {
                     "command": "citrix.commands.context.openghsite",
                     "group": "citrixGithubContext",
-                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                    "when": "view == citrix.view.citrix-github-explorer"
                 },
                 {
                     "command": "citrix.commands.context.openprojectsite",
                     "group": "citrixGithubContext",
-                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                    "when": "view == citrix.view.citrix-github-explorer"
                 },
                 {
                     "command": "citrix.commands.context.openprojectissues",
                     "group": "citrixGithubContext",
-                    "when": "view == citrix.view.citrixdeveloper && viewItem == githubProject"
+                    "when": "view == citrix.view.citrix-github-explorer"
                 }
             ]
         }
