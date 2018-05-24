@@ -1,348 +1,419 @@
 [{
-    "pages": [{
-        "pagetitle": "Data available using the SDK",
-        "pagelink": "https://developer-docs.citrix.com/projects/appdna-sdk/en/latest//data"
+    "children": [{
+        "title": "Data available using the SDK",
+        "url": "https://developer-docs.citrix.com/projects/appdna-sdk/en/latest//data",
+        "children": []
     }],
-    "sdktitle": "Citrix AppDNA SDK Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/appdna-sdk/en/latest/"
+    "title": "Citrix AppDNA SDK Reference",
+    "url": "https://developer-docs.citrix.com/projects/appdna-sdk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "Examples",
-        "pagelink": "https://developer-docs.citrix.com/projects/access-monitor-service-data-citrix-cloud/en/latest//examples"
+    "children": [],
+    "title": "Accessing Monitor Service Data in Citrix Cloud",
+    "url": "https://developer-docs.citrix.com/projects/access-monitor-service-data-citrix-cloud/en/latest/"
+}, {
+    "children": [{
+        "title": "System Requirements",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//system-requirements",
+        "children": []
+    }, {
+        "title": "Using Example Programs",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//using-example-programs",
+        "children": []
+    }, {
+        "title": "Programming Guide",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//programming-guide",
+        "children": []
+    }, {
+        "title": "Known Limitations",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//known-limitations",
+        "children": []
+    }, {
+        "title": "Programming Reference",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//programming-reference",
+        "children": []
     }],
-    "sdktitle": "Accessing Monitor Service Data in Citrix Cloud",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/access-monitor-service-data-citrix-cloud/en/latest/"
+    "title": "Citrix Virtual Channel SDK",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "System Requirements",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//system-requirements"
+    "children": [{
+        "title": "Capabilities",
+        "url": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6//capabilities",
+        "children": []
     }, {
-        "pagetitle": "Using Example Programs",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//using-example-programs"
+        "title": "Events",
+        "url": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6//events",
+        "children": []
     }, {
-        "pagetitle": "Programming Guide",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//programming-guide"
-    }, {
-        "pagetitle": "Known Limitations",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//known-limitations"
-    }, {
-        "pagetitle": "Programming Reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest//programming-reference"
+        "title": "Global",
+        "url": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6//global",
+        "children": []
     }],
-    "sdktitle": "Citrix Virtual Channel SDK",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-android-virtual-channel-sdk/en/latest/"
+    "title": "HDX SDK for Citrix Receiver for Chrome 2.5.1",
+    "url": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6/"
 }, {
-    "pages": [{
-        "pagetitle": "Capabilities",
-        "pagelink": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6//capabilities"
+    "children": [{
+        "title": "What's new",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//whats-new",
+        "children": []
     }, {
-        "pagetitle": "Events",
-        "pagelink": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6//events"
+        "title": "System requirements",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//system-requirements",
+        "children": []
     }, {
-        "pagetitle": "Global",
-        "pagelink": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6//global"
+        "title": "Using example programs",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//using-example-programs",
+        "children": []
+    }, {
+        "title": "Building examples",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//building-examples",
+        "children": []
+    }, {
+        "title": "Programming guide",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//programming-guide",
+        "children": []
+    }, {
+        "title": "Programming reference",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//programming-reference",
+        "children": []
+    }, {
+        "title": "Global",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//global",
+        "children": []
     }],
-    "sdktitle": "HDX SDK for Citrix Receiver for Chrome 2.5.1",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/hdx-sdk-for-receiver-for-chrome/en/2.6/"
+    "title": "Virtual Channel SDK for Citrix Receiver for Chrome 2.6",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6/"
 }, {
-    "pages": [{
-        "pagetitle": "What's new",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//whats-new"
+    "children": [{
+        "title": "SDK Capabilities",
+        "url": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//capabilities",
+        "children": []
     }, {
-        "pagetitle": "System requirements",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//system-requirements"
+        "title": "Events",
+        "url": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//events",
+        "children": []
     }, {
-        "pagetitle": "Using example programs",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//using-example-programs"
+        "title": "Global",
+        "url": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//global",
+        "children": []
     }, {
-        "pagetitle": "Building examples",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//building-examples"
-    }, {
-        "pagetitle": "Programming guide",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//programming-guide"
-    }, {
-        "pagetitle": "Programming reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//programming-reference"
-    }, {
-        "pagetitle": "Global",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6//global"
+        "title": "SDK Sample",
+        "url": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//sample",
+        "children": []
     }],
-    "sdktitle": "Virtual Channel SDK for Citrix Receiver for Chrome 2.6",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-chrome-virtual-channel-sdk/en/2.6/"
+    "title": "Citrix HTML5 Receiver SDK",
+    "url": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "SDK Capabilities",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//capabilities"
+    "children": [{
+        "title": "System Requirements",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//system-requirements",
+        "children": []
     }, {
-        "pagetitle": "Events",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//events"
+        "title": "Installing the Virtual Channel SDK",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//installation",
+        "children": []
     }, {
-        "pagetitle": "Global",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//global"
+        "title": "Architecture",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//architecture",
+        "children": []
     }, {
-        "pagetitle": "SDK Sample",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest//sample"
+        "title": "Using Example Programs",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//example-programs",
+        "children": []
+    }, {
+        "title": "Programming Guide",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//programming-guide",
+        "children": []
+    }, {
+        "title": "Programming Reference",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//programming-reference",
+        "children": []
     }],
-    "sdktitle": "Citrix HTML5 Receiver SDK",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-html5-sdk/en/latest/"
+    "title": "Citrix Virtual Channel SDK for Citrix Receiver for Linux 13.5",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "System Requirements",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//system-requirements"
+    "children": [],
+    "title": "Citrix Receiver for Linux 13.9.1 Command-line Reference",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-command-reference/en/latest/"
+}, {
+    "children": [],
+    "title": "Certificate Identity Declaration SDK for Citrix Receiver for Linux 13.9.1",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-certificate-identity-declaration-sdk/en/latest/"
+}, {
+    "children": [],
+    "title": "Platform Optimization SDK for Citrix Receiver for Linux 13.9.1",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-linux-platform-optimization-sdk/en/latest/"
+}, {
+    "children": [{
+        "title": "System Requirements",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//system-requirements",
+        "children": []
     }, {
-        "pagetitle": "Installing the Virtual Channel SDK",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//installation"
+        "title": "Build Process",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//build-process",
+        "children": []
     }, {
-        "pagetitle": "Architecture",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//architecture"
+        "title": "Using the Virtual Channel SDK",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//using-the-sdk",
+        "children": []
     }, {
-        "pagetitle": "Using Example Programs",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//example-programs"
+        "title": "Using Example Programs",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//using-example-programs",
+        "children": []
     }, {
-        "pagetitle": "Programming Guide",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//programming-guide"
+        "title": "Programming Guide",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//programming-guide",
+        "children": []
     }, {
-        "pagetitle": "Programming Reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest//programming-reference"
+        "title": "Programming Reference",
+        "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//programming-reference",
+        "children": []
     }],
-    "sdktitle": "Citrix Virtual Channel SDK for Citrix Receiver for Linux 13.5",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-linux-virtual-channel-sdk/en/latest/"
+    "title": "Citrix Virtual Channel SDK for Citrix Receiver for Windows",
+    "url": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest/"
 }, {
-    "pages": [],
-    "sdktitle": "Citrix Receiver for Linux 13.9.1 Command-line Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-linux-command-reference/en/latest/"
-}, {
-    "pages": [],
-    "sdktitle": "Certificate Identity Declaration SDK for Citrix Receiver for Linux 13.9.1",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-linux-certificate-identity-declaration-sdk/en/latest/"
-}, {
-    "pages": [],
-    "sdktitle": "Platform Optimization SDK for Citrix Receiver for Linux 13.9.1",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-linux-platform-optimization-sdk/en/latest/"
-}, {
-    "pages": [{
-        "pagetitle": "System Requirements",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//system-requirements"
+    "children": [{
+        "title": "What's new",
+        "url": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//whats-new",
+        "children": []
     }, {
-        "pagetitle": "Build Process",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//build-process"
+        "title": "Setting up your environment",
+        "url": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//setting-up-your-environment",
+        "children": []
     }, {
-        "pagetitle": "Using the Virtual Channel SDK",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//using-the-sdk"
+        "title": "API functions",
+        "url": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//api-functions",
+        "children": []
     }, {
-        "pagetitle": "Using Example Programs",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//using-example-programs"
+        "title": "Launching Applications and Session Management using the Self Service Plug-in (SSP)",
+        "url": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//launching-applications-and-session-management",
+        "children": []
     }, {
-        "pagetitle": "Programming Guide",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//programming-guide"
-    }, {
-        "pagetitle": "Programming Reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest//programming-reference"
+        "title": "API examples",
+        "url": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//examples",
+        "children": []
     }],
-    "sdktitle": "Citrix Virtual Channel SDK for Citrix Receiver for Windows",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/receiver-for-windows-virtual-channel-sdk/en/latest/"
+    "title": "Fast Connect 3 Credential Insertion API",
+    "url": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "What's new",
-        "pagelink": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//whats-new"
+    "children": [{
+        "title": "Using the SDK",
+        "url": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest//using-the-sdk",
+        "children": []
     }, {
-        "pagetitle": "Setting up your environment",
-        "pagelink": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//setting-up-your-environment"
+        "title": "CCM SDK API Reference",
+        "url": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest//reference",
+        "children": []
     }, {
-        "pagetitle": "API functions",
-        "pagelink": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//api-functions"
-    }, {
-        "pagetitle": "Launching Applications and Session Management using the Self Service Plug-in (SSP)",
-        "pagelink": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//launching-applications-and-session-management"
-    }, {
-        "pagetitle": "API examples",
-        "pagelink": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest//examples"
+        "title": "Appendix",
+        "url": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest//appendix",
+        "children": []
     }],
-    "sdktitle": "Fast Connect 3 Credential Insertion API",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/fast-connect-api-for-receiver-for-windows/en/latest/"
+    "title": "Citrix Common Connection Manager SDK",
+    "url": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "Using the SDK",
-        "pagelink": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest//using-the-sdk"
+    "children": [],
+    "title": "Storebrowse for Citrix Receiver for Windows",
+    "url": "https://developer-docs.citrix.com/projects/storebrowse-for-receiver-for-windows/en/latest/"
+}, {
+    "children": [],
+    "title": "Citrix NetScaler SNMP OID Reference",
+    "url": "https://developer-docs.citrix.com/projects/netscaler-snmp-oid-reference/en/12.0/"
+}, {
+    "children": [],
+    "title": "Citrix NetScaler Syslog Message Reference",
+    "url": "https://developer-docs.citrix.com/projects/netscaler-syslog-message-reference/en/12.0/"
+}, {
+    "children": [{
+        "title": "Before you begin",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//before-you-begin",
+        "children": []
     }, {
-        "pagetitle": "CCM SDK API Reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest//reference"
+        "title": "Performing Basic NetScaler Operations",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//performing-basic-netscaler-operations",
+        "children": []
     }, {
-        "pagetitle": "Appendix",
-        "pagelink": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest//appendix"
+        "title": "Performing NetScaler Resource Operations",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//performing-netscaler-resource-operations",
+        "children": []
+    }, {
+        "title": "Use cases",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//usecases",
+        "children": []
+    }, {
+        "title": "Error and Exception Handling",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//error-and-exception-handling",
+        "children": []
+    }, {
+        "title": "API Reference",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//api-reference",
+        "children": []
     }],
-    "sdktitle": "Citrix Common Connection Manager SDK",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/common-connection-manager-sdk/en/latest/"
+    "title": "Citrix NetScaler 12.0 NITRO API Documentation",
+    "url": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest/"
 }, {
-    "pages": [],
-    "sdktitle": "Storebrowse for Citrix Receiver for Windows",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/storebrowse-for-receiver-for-windows/en/latest/"
+    "children": [],
+    "title": "Netscaler Command Reference",
+    "url": "https://developer-docs.citrix.com/projects/netscaler-command-reference/en/12.0/"
 }, {
-    "pages": [],
-    "sdktitle": "Citrix NetScaler SNMP OID Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/netscaler-snmp-oid-reference/en/12.0/"
+    "children": [],
+    "title": "Netscaler 12.0 Advanced Policy Expression Reference",
+    "url": "https://developer-docs.citrix.com/projects/netscaler-advanced-policy-expression-reference/en/12.0/"
 }, {
-    "pages": [],
-    "sdktitle": "Citrix NetScaler Syslog Message Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/netscaler-syslog-message-reference/en/12.0/"
-}, {
-    "pages": [{
-        "pagetitle": "Before you begin",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//before-you-begin"
-    }, {
-        "pagetitle": "Performing Basic NetScaler Operations",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//performing-basic-netscaler-operations"
-    }, {
-        "pagetitle": "Performing NetScaler Resource Operations",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//performing-netscaler-resource-operations"
-    }, {
-        "pagetitle": "Use cases",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//usecases"
-    }, {
-        "pagetitle": "Error and Exception Handling",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//error-and-exception-handling"
-    }, {
-        "pagetitle": "API Reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest//api-reference"
+    "children": [{
+        "title": "Developer Documentation",
+        "url": "https://developer-docs.citrix.com/projects/netscaler-ansible-modules/en/latest//development-utilities",
+        "children": []
     }],
-    "sdktitle": "Citrix NetScaler 12.0 NITRO API Documentation",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/netscaler-nitro-api/en/latest/"
+    "title": "Citrix NetScaler Ansible Module Documentation",
+    "url": "https://developer-docs.citrix.com/projects/netscaler-ansible-modules/en/latest/"
 }, {
-    "pages": [],
-    "sdktitle": "Netscaler Command Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/netscaler-command-reference/en/12.0/"
+    "children": [],
+    "title": "Citrix Provisioning Services 7.12 SOAP Server Programmer's Guide",
+    "url": "https://developer-docs.citrix.com/projects/provisioning-services-sdk/en/latest/"
 }, {
-    "pages": [],
-    "sdktitle": "Netscaler 12.0 Advanced Policy Expression Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/netscaler-advanced-policy-expression-reference/en/12.0/"
+    "children": [],
+    "title": "Citrix Provisioning Services 7.12 PowerShell with Objects Programmer’s Guide",
+    "url": "https://developer-docs.citrix.com/projects/provisioning-services-powershell-object-programming-guide/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "Developer Documentation",
-        "pagelink": "https://developer-docs.citrix.com/projects/netscaler-ansible-modules/en/latest//development-utilities"
+    "children": [],
+    "title": "Citrix StoreFront 3.13 SDK PowerShell Modules",
+    "url": "https://developer-docs.citrix.com/projects/storefront-powershell-sdk/en/latest/"
+}, {
+    "children": [{
+        "title": "Getting Started",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//getting-started",
+        "children": []
+    }, {
+        "title": "Overview",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//overview",
+        "children": []
+    }, {
+        "title": "Using",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//using",
+        "children": []
+    }, {
+        "title": "Using HTTP",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//using-http",
+        "children": []
+    }, {
+        "title": "XenServer API Extensions",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//xs-api-extensions",
+        "children": []
+    }, {
+        "title": "XenCenter API Extensions",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//xc-api-extensions",
+        "children": []
     }],
-    "sdktitle": "Citrix NetScaler Ansible Module Documentation",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/netscaler-ansible-modules/en/latest/"
+    "title": "Citrix XenServer 7.4 CR Software Development Kit Guide",
+    "url": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4/"
 }, {
-    "pages": [],
-    "sdktitle": "Citrix Provisioning Services 7.12 SOAP Server Programmer's Guide",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/provisioning-services-sdk/en/latest/"
-}, {
-    "pages": [],
-    "sdktitle": "Citrix Provisioning Services 7.12 PowerShell with Objects Programmer’s Guide",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/provisioning-services-powershell-object-programming-guide/en/latest/"
-}, {
-    "pages": [],
-    "sdktitle": "Citrix StoreFront 3.13 SDK PowerShell Modules",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/storefront-powershell-sdk/en/latest/"
-}, {
-    "pages": [{
-        "pagetitle": "Getting Started",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//getting-started"
+    "children": [{
+        "title": "Wire Protocol for Remote API Calls",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4//wire-protocol",
+        "children": []
     }, {
-        "pagetitle": "Overview",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//overview"
+        "title": "VM Lifecycle",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4//vm-lifecycle",
+        "children": []
     }, {
-        "pagetitle": "Using",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//using"
-    }, {
-        "pagetitle": "Using HTTP",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//using-http"
-    }, {
-        "pagetitle": "XenServer API Extensions",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//xs-api-extensions"
-    }, {
-        "pagetitle": "XenCenter API Extensions",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4//xc-api-extensions"
+        "title": "API Reference",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4//api-ref-autogen",
+        "children": []
     }],
-    "sdktitle": "Citrix XenServer 7.4 CR Software Development Kit Guide",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/xenserver-sdk/en/7.4/"
+    "title": "Citrix XenServer 7.4 CR Management API Reference",
+    "url": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4/"
 }, {
-    "pages": [{
-        "pagetitle": "Wire Protocol for Remote API Calls",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4//wire-protocol"
+    "children": [{
+        "title": "Getting Started",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//getting-started",
+        "children": []
     }, {
-        "pagetitle": "VM Lifecycle",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4//vm-lifecycle"
+        "title": "Enabling NBD connection",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//enabling-nbd",
+        "children": []
     }, {
-        "pagetitle": "API Reference",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4//api-ref-autogen"
+        "title": "Using CBT with a VDI",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//using-with-vdi",
+        "children": []
+    }, {
+        "title": "Deleting VDI snapshots",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//deleting-snapshot",
+        "children": []
+    }, {
+        "title": "Getting the list of changes blocks in a VDI",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//list-changed-blocks",
+        "children": []
+    }, {
+        "title": "Exporting changed blocks over NBD",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//exporting-changed-blocks",
+        "children": []
+    }, {
+        "title": "Coalescing changed blocks onto a base VDI",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//coalescing-blocks",
+        "children": []
+    }, {
+        "title": "Appendices",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//appendices",
+        "children": []
     }],
-    "sdktitle": "Citrix XenServer 7.4 CR Management API Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/xenserver-management-api/en/7.4/"
+    "title": "Citrix XenServer Changed Block Tracking Guide",
+    "url": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "Getting Started",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//getting-started"
+    "children": [{
+        "title": "Getting Started",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//getting-started",
+        "children": []
     }, {
-        "pagetitle": "Enabling NBD connection",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//enabling-nbd"
+        "title": "Building the example packs",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//building-example-packs",
+        "children": []
     }, {
-        "pagetitle": "Using CBT with a VDI",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//using-with-vdi"
+        "title": "Installing supplemental packs",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//installing-packs",
+        "children": []
     }, {
-        "pagetitle": "Deleting VDI snapshots",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//deleting-snapshot"
+        "title": "Producing driver RPMs",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//producing-rpms",
+        "children": []
     }, {
-        "pagetitle": "Getting the list of changes blocks in a VDI",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//list-changed-blocks"
+        "title": "Creating a supplemental pack",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//creating-a-pack",
+        "children": []
     }, {
-        "pagetitle": "Exporting changed blocks over NBD",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//exporting-changed-blocks"
+        "title": "Rules and Guidelines",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//rules-and-guidelines",
+        "children": []
     }, {
-        "pagetitle": "Coalescing changed blocks onto a base VDI",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//coalescing-blocks"
+        "title": "Testing and Certification",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//testing-and-certification",
+        "children": []
     }, {
-        "pagetitle": "Appendices",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest//appendices"
+        "title": "Additional Resources",
+        "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//additional-resources",
+        "children": []
     }],
-    "sdktitle": "Citrix XenServer Changed Block Tracking Guide",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/xenserver-changed-block-tracking-guide/en/latest/"
+    "title": "Citrix XenServer Supplemental Packs and the DDK Guide",
+    "url": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "Getting Started",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//getting-started"
+    "children": [{
+        "title": "Understanding the XenDesktop Administration Model",
+        "url": "https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest//understanding-xendesktop-administration-model",
+        "children": []
     }, {
-        "pagetitle": "Building the example packs",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//building-example-packs"
-    }, {
-        "pagetitle": "Installing supplemental packs",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//installing-packs"
-    }, {
-        "pagetitle": "Producing driver RPMs",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//producing-rpms"
-    }, {
-        "pagetitle": "Creating a supplemental pack",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//creating-a-pack"
-    }, {
-        "pagetitle": "Rules and Guidelines",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//rules-and-guidelines"
-    }, {
-        "pagetitle": "Testing and Certification",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//testing-and-certification"
-    }, {
-        "pagetitle": "Additional Resources",
-        "pagelink": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest//additional-resources"
+        "title": "Getting Started Guide",
+        "url": "https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest//getting-started",
+        "children": []
     }],
-    "sdktitle": "Citrix XenServer Supplemental Packs and the DDK Guide",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/xenserver-ddk/en/latest/"
+    "title": "Citrix PowerShell SDK Documentation",
+    "url": "https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest/"
 }, {
-    "pages": [{
-        "pagetitle": "Understanding the XenDesktop Administration Model",
-        "pagelink": "https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest//understanding-xendesktop-administration-model"
-    }, {
-        "pagetitle": "Getting Started Guide",
-        "pagelink": "https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest//getting-started"
-    }],
-    "sdktitle": "Citrix PowerShell SDK Documentation",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/delivery-controller-sdk/en/latest/"
+    "children": [],
+    "title": "Citrix Director 7.16 Monitor API Reference",
+    "url": "https://developer-docs.citrix.com/projects/monitor-service-odata-api/en/latest/"
 }, {
-    "pages": [],
-    "sdktitle": "Citrix Director 7.16 Monitor API Reference",
-    "sdkmainurl": "https://developer-docs.citrix.com/projects/monitor-service-odata-api/en/latest/"
+    "children": [],
+    "title": "Citrix Federated Authentication Service 7.17 PowerShell cmdlets"
 }, {
-    "pages": [],
-    "sdktitle": "Citrix Federated Authentication Service 7.17 PowerShell cmdlets"
-}, {
-    "pages": [],
-    "sdktitle": "Workspace Environment Management SDK v4.5 Documentation"
+    "children": [],
+    "title": "Workspace Environment Management SDK v4.5 Documentation"
 }]

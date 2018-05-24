@@ -6,15 +6,18 @@ import {Uri} from 'vscode';
 import fs = require("fs");
 import { CPXItem } from './QuickPickItems/CPXItem';
 import * as Helpers from './helpers/docker';
-import { CitrixDeveloperProvider } from './Providers/CitrixDeveloperProvider';
+import { SDKDocsProvider } from './Providers/SDKDocsProvider';
+import { GithubProjectProvider } from './Providers/GithubProjectProvider';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-    const devProvider = new CitrixDeveloperProvider(context);
-
-    vscode.window.registerTreeDataProvider('citrix.view.citrixdeveloper',devProvider);
+    const sdkDocProvider = new SDKDocsProvider(context);
+    vscode.window.registerTreeDataProvider('citrix.view.citrix-sdk-documentation',sdkDocProvider);
+    
+    const githubProvider = new GithubProjectProvider(context);
+    vscode.window.registerTreeDataProvider('citrix.view.citrix-github-explorer',githubProvider);
 
     let downloadNetCoreDockerSample = vscode.commands.registerCommand("citrix.commands.downloaddockersfsample", () => {
         const terminal: vscode.Terminal = vscode.window.createTerminal('Docker');

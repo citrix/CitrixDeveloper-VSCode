@@ -1,27 +1,12 @@
-'use strict';
-import * as vscode from 'vscode';
-import { INode } from '../../Interfaces/INode';
-import { GithubProject } from './GithubProject';
+import * as vscode from 'vscode'
+import { TreeItem, TreeItemCollapsibleState } from 'vscode';
 
-export class GithubProjectNode implements INode {
-    constructor(private Project: GithubProject, private context: vscode.ExtensionContext ) {
-        
-    }
-
-    getTreeItem(): vscode.TreeItem {
-        let lightIconPath =  this.context.asAbsolutePath("media/githubmark-light.png");
-        let darkIconPath = this.context.asAbsolutePath("media/githubmark-dark.png");
-        
-        return {
-            label: this.Project.title,
-            iconPath: { 
-                light:lightIconPath,
-                dark:darkIconPath },
-            contextValue: 'githubProject'
-        }
-    }
-    getChildren(): INode[] | Promise<INode[]> {
-        return [];
-    }
-    
+export class GithubProjectNode implements TreeItem
+{
+    label: string;    
+    iconPath?: string | vscode.Uri | { light: string | vscode.Uri; dark: string | vscode.Uri; };
+    command?: vscode.Command;
+    collapsibleState?: TreeItemCollapsibleState;
+    contextValue?: string;
+    context: vscode.ExtensionContext;
 }
