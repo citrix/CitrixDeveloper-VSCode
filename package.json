@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -41,11 +41,28 @@
                 }
             }
         ],
-        "views": {
-            "explorer": [
+        "viewsContainers": {
+            "activitybar": [
                 {
-                    "id": "citrix.view.citrixdeveloper",
-                    "name": "Citrix Developer"
+                    "id": "citrix-explorer-citrix",
+                    "title": "Citrix Developer",
+                    "icon": "media/VSCodeIcon.svg"
+                }
+            ]
+        },
+        "views": {
+            "citrix-explorer-citrix": [
+                {
+                    "id": "citrix.view.citrix-sdk-documentation",
+                    "name": "SDK Documentation"
+                },
+                {
+                    "id": "citrix.view.citrix-github-explorer",
+                    "name": "Github Projects"
+                },
+                {
+                    "id":"citrix.view.citrix-powershell-scripts",
+                    "name":"PowerShell Scripts"
                 }
             ]
         },
