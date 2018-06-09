@@ -3,46 +3,52 @@
 Citrix Developer tools for Visual Studio Code is an extension that helps developers build applications that target the Citrix platform by adding Samples, code snippets and SDK documentation to the IDE.
 
 ![Main Window View](images/maindemo.gif)
+
 ![Updated Explorer View](images/mainview.png)
 
 ## Features
 
-While this initial release in limited in features, the extension will support samples, code snippets, SDK documentation and project scaffolding. Below is the list of feature broken down by implemented versus on road map.
+### Implemented in this release
 
-### Implemented
-
-- [x] Explorer view to list SDK Documentation
-- [x] Icon on view for developer.citrix.com site
-- [x] Icon on view for  User feedback using UserVoice
-- [x] Added Citrix commands to command palette to pull/start/stop netscaler CPX container from docker store
-- [x] Merged Github and SDK Document into a single treeview for the developer explorer.
-- [x] Add github samples to the new explorer view and give the user the ability to clone repo directly from the UI.
+- Powershell Provider
+- Script package installer
+- Citrix Community Script Explorer
 
 ### On Roadmap
 
-- [ ] Provide samples integration into the command pallet
-- [ ] Code snippets for XenServer Citrix SDK
-- [ ] Code snippets for Storefront SDK
-- [ ] Code snippets for XenApp/XenDesktop Powershell
-- [ ] Code snippets for Netscaler SDK
-- [ ] Samples for XenServer Citrix SDK
-- [ ] Samples for Storefront SDK
-- [ ] Samples for XenApp/XenDesktop Powershell
-- [ ] Samples for Netscaler SDK
+For roadmap based items, we will utilizing the "feature" tag within the project issues along with the kanban board.
 
 ## Using the extension
 
-Install and open Visual Studio Code. Press Ctrl+Shift+X or Cmd+Shift+X to open the Extensions pane. Find and install the Citrix Developer extension.  The extension is now activated.
+Install and open Visual Studio Code. Press Ctrl+Shift+X or Cmd+Shift+X to open the Extensions pane. Find and install the Citrix Developer extension.  The extension is now activated. You can also download the extension manually from the marketplace [here](https://marketplace.visualstudio.com/items?itemName=CitrixDeveloper.citrixdeveloper-vscode).
 
 ## Feedback
 
-We are always interested in your feedback. You can either use our github issues or our [UserVoice](http://www.tinyurl.com/citrixuservoice) site for logging issues or requesting features. We monitor both.
+We are always interested in your feedback. You can either use our github issues or our [UserVoice](http://www.tinyurl.com/citrixuservoice) site for logging issues or requesting features. We monitor both. If you would to contact us directly you can use twitter [@citrixdeveloper](https://www.twitter.com/citrixdeveloper) or [@johnmcbride](http://www.twitter.com/johnmcbride)
 
 ## Known Issues
 
 - Sites are open using the defaul browser. Would like to use the in-windows browser of VSCode.
 - Samples not available yet.
 - Snippets not available yet.
+
+## Version Information
+
+### 1.3.0
+
+Added the ability for the user to install a vsix script package built by the community. Please see [the Citrix Script Package project on github](https://github.com/citrix/citrix-script-packager) for more information on how to build these packages.
+
+![Install script package](images/installpackage-cmd.png)
+
+![viewer](images/packageviewer.png)
+
+### 1.2.0
+
+Moved the citrix based explorer views out into a new activity bar.
+
+Added multiple explorer views into the citrix activity bar to include the SDK Documentation, community script and [Citrix based Github projects](https://www.github.com/citrix).
+
+![](images/explorerbar-main.png)
 
 ### 0.7.0
 
