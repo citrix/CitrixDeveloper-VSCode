@@ -1,2 +1,6 @@
+#folder to ignore
 out
 node_modules
+
+#extensions to ignore
+*.vsix
