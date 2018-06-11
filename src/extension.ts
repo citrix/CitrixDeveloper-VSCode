@@ -3,11 +3,17 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import {Uri} from 'vscode';
-import fs = require("fs");
+const fs = require('fs');
 import { CPXItem } from './QuickPickItems/CPXItem';
 import * as Helpers from './helpers/docker';
 import { SDKDocsProvider } from './Providers/SDKDocsProvider';
 import { GithubProjectProvider } from './Providers/GithubProjectProvider';
+import * as path from 'path';
+import { PowershellProvider } from './Providers/PowershellProvider';
+const cfs = require ('fs-copy-file-sync');
+const jsonfile = require('jsonfile');
+import * as fse from 'fs-extra';
+import { mkdirSync } from 'fs';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -19,12 +25,17 @@ export function activate(context: vscode.ExtensionContext) {
     const githubProvider = new GithubProjectProvider(context);
     vscode.window.registerTreeDataProvider('citrix.view.citrix-github-explorer',githubProvider);
 
-    let downloadNetCoreDockerSample = vscode.commands.registerCommand("citrix.commands.downloaddockersfsample", () => {
+    //test dynamic tree provider
+    const powershellProvider = new PowershellProvider(context);
+    vscode.window.registerTreeDataProvider('citrix.view.citrix-scripts',powershellProvider);
+    //endtest
+    vscode.commands.registerCommand('citrix.commands.downloaddockersfsample', () => {
         const terminal: vscode.Terminal = vscode.window.createTerminal('Docker');
         terminal.show();
         terminal.sendText(`docker run -d -p 5000:5000 citrixdeveloper/citrix-storefront-apidemo`);
     });
-    let downloadNetCoreSample = vscode.commands.registerCommand("citrix.commands.downloadnetcoresfsample", () => {
+
+    vscode.commands.registerCommand('citrix.commands.downloadnetcoresfsample', () => {
         const config = vscode.workspace.getConfiguration('citrixdeveloper');
         //grab the clone directory that might be saved in the workspace settings.
         var baseCloneDir: string = config.get<string>('gitclonebasedirectory',"");
@@ -84,7 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
         }); 
     });
 
-    let openDeveloperSiteCmd = vscode.commands.registerCommand("citrix.commands.openCitrixDeveloperSite", () => {
+    let openDeveloperSiteCmd = vscode.commands.registerCommand('citrix.commands.openCitrixDeveloperSite', () => {
         const uri = vscode.Uri.parse("http://developer.citrix.com");
         vscode.commands.executeCommand('vscode.open', uri);
     });
@@ -162,6 +173,50 @@ export function activate(context: vscode.ExtensionContext) {
         });
     });
 
+    vscode.commands.registerCommand('citrix.commands.installpackage', () => {
+        vscode.window.showOpenDialog({
+            openLabel:"Select VSIX",
+            canSelectMany: false,
+            canSelectFolders: false,
+            filters: {
+                'Citrix Script Packages': ['vsix']
+            }
+        })
+        .then( (file) => {
+            const admzip = require('adm-zip');
+            var fileName = path.basename(file[0].fsPath);
+            var ext = path.extname(fileName);
+            var baseName = path.basename(file[0].fsPath,'.vsix');
+            //copy file first
+            
+            cfs(file[0].fsPath,`${context.extensionPath}/packages/${baseName}.zip`);
+            var zip = new admzip(`${context.extensionPath}/packages/${baseName}.zip`);
+            
+            zip.extractAllTo(`${context.extensionPath}/`,true);
+            fs.unlinkSync(`${context.extensionPath}/packages/${baseName}.zip`);
+            
+            //load the manifest file to get the name and description
+            //read the manifest file
+            const manifestFile = `${context.extensionPath}/packages/${baseName}/manifest.json`;
+            const manifest = jsonfile.readFileSync(manifestFile);
+            console.log(manifest.packageName);
+
+            vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
+
+            
+            powershellProvider.refreshPackages();
+        });
+    })
+    
+    let scriptClickCmd = vscode.commands.registerCommand('citrix.commands.loadscript', (scriptObj) => {
+        console.log(scriptObj.location);
+        // vscode.commands.executeCommand()
+        
+        vscode.workspace.openTextDocument(scriptObj.location)
+        .then((doc) => {
+            vscode.window.showTextDocument(doc);
+        });        
+    });
     let openGithubRepo = vscode.commands.registerCommand('citrix.commands.context.openghsite', RepoInfo => {
         const uri = vscode.Uri.parse(RepoInfo.Project.projectURL);
         vscode.commands.executeCommand('vscode.open', uri);
@@ -296,6 +351,14 @@ export function activate(context: vscode.ExtensionContext) {
         {
             vscode.window.showErrorMessage("Unable to connect to the Docker daemon. Please make sure docker is installed and running.");
         }
+    });
+
+    let deletePackageCmd = vscode.commands.registerCommand('citrix.commands.context.deletepackage', (viewItem) => {
+        console.log(viewItem.PSDoc.location);
+        fse.removeSync(viewItem.PSDoc.location);
+        //need to inform the user that the package was deleted
+        powershellProvider.refreshPackages();
+        vscode.window.showInformationMessage(`Citrix package ${viewItem.PSDoc.name} deleted`);
     });
 
     context.subscriptions.push(openDeveloperSiteCmd);
