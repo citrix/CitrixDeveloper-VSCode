@@ -3,7 +3,6 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import {Uri} from 'vscode';
-const fs = require('fs');
 import { CPXItem } from './QuickPickItems/CPXItem';
 import * as Helpers from './helpers/docker';
 import { SDKDocsProvider } from './Providers/SDKDocsProvider';
@@ -14,6 +13,14 @@ const cfs = require ('fs-copy-file-sync');
 const jsonfile = require('jsonfile');
 import * as fse from 'fs-extra';
 import { mkdirSync } from 'fs';
+import { URL } from 'url';
+import { ScriptPackage } from './QuickPickItems/ScriptPackage';
+let Parser = require('rss-parser');
+let parser = new Parser();
+const fs = require('fs');
+var os = require('os');
+const admzip = require('adm-zip');
+import * as rp from 'request-promise';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -174,44 +181,158 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     vscode.commands.registerCommand('citrix.commands.installpackage', () => {
-        vscode.window.showOpenDialog({
-            openLabel:"Select VSIX",
-            canSelectMany: false,
-            canSelectFolders: false,
-            filters: {
-                'Citrix Script Packages': ['vsix']
+        //prompt the user for a local install or to query the list
+        //vsix repos listed in the user settings (vsixrepositories)
+        let installTypes = ['Select local package','Select package from configured sources'];
+        vscode.window.showQuickPick(installTypes).then( async (selectOption) => {
+            console.log(selectOption);
+            switch (selectOption.toLowerCase()) {
+                case 'select local package':
+                    vscode.window.showOpenDialog({
+                        openLabel:"Select VSIX",
+                        canSelectMany: false,
+                        canSelectFolders: false,
+                        filters: {
+                            'Citrix Script Packages': ['vsix']
+                        }
+                    })
+                    .then( (file) => {
+                        var fileName = path.basename(file[0].fsPath);
+                        var ext = path.extname(fileName);
+                        var baseName = path.basename(file[0].fsPath,'.vsix');
+                        //copy file first
+                        
+                        cfs(file[0].fsPath,`${context.extensionPath}/packages/${baseName}.zip`);
+                        var zip = new admzip(`${context.extensionPath}/packages/${baseName}.zip`);
+                        
+                        zip.extractAllTo(`${context.extensionPath}/`,true);
+                        fs.unlinkSync(`${context.extensionPath}/packages/${baseName}.zip`);
+                        
+                        //load the manifest file to get the name and description
+                        //read the manifest file
+                        const manifestFile = `${context.extensionPath}/packages/${baseName}/manifest.json`;
+                        const manifest = jsonfile.readFileSync(manifestFile);
+                        console.log(manifest.packageName);
+            
+                        vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
+
+                        powershellProvider.refreshPackages();
+                    });
+                    break;
+                case 'select package from configured sources':
+                    const config = vscode.workspace.getConfiguration('citrixdeveloper');
+                    var vsixRepositories: Array<string> = config.get<Array<string>>('vsixrepositories',[]);
+                    let availablePackages: Array<ScriptPackage> = new Array<ScriptPackage>();
+
+                    if ( vsixRepositories.length == 0 )
+                    {
+                        vscode.window.showErrorMessage('You don\'t seem to have any VSIX repositories configured. Please configure a repository in the user setting > Citrix Developer section');
+                        return;
+                    }
+                    for (const repo of vsixRepositories) 
+                    {
+                        let rssContents = null;
+                        if ( repo.toLowerCase().indexOf('file:') != -1 )
+                        {
+                            //file url
+                            let fileUrl = new URL(repo);
+                            rssContents = fs.readFileSync(fileUrl,'utf8');
+                        }
+                        else
+                        {
+                            try 
+                            {
+                                rssContents = await rp(repo);    
+                            } 
+                            catch (error) 
+                            {
+                                console.log(error);
+                                
+                            }
+                            
+                        }
+                        if ( rssContents == null )
+                        {
+                            vscode.window.showErrorMessage(`Unable to retrieve a listing of Citrix script packages from the configured source ${repo}.`);
+                        }
+                        else
+                        {
+                            var items = await parser.parseString(rssContents);
+                            items.items.forEach(item => {
+                                let scriptPackage = new ScriptPackage();
+                                scriptPackage.label = (item.author == null) ? item.title : `(${item.author.toLowerCase()}) ${item.title}`;
+                                scriptPackage.description = (item.content == null) ? '' : item.content;
+                                scriptPackage.link = item.link;
+                                scriptPackage.author = (item.author == null) ? 'unknown' : item.author.toLowerCase();
+                                availablePackages.push(scriptPackage);
+                            });
+                        }
+                    }
+                    if ( availablePackages.length > 0)
+                    {
+                        vscode.window.showQuickPick(availablePackages).then(async citrixPackage => {
+                            let tempFilePath = path.normalize(`${context.extensionPath}/packages/${path.basename(citrixPackage.link)}`);
+
+                            if ( citrixPackage.link.toLowerCase().indexOf('file://') != -1 )
+                            {
+                                var fileUrl = new URL(citrixPackage.link);
+                                
+                                fs.copyFileSync(fileUrl,tempFilePath);
+                            }
+                            else
+                            {
+                                var requestOptions = {
+                                    url: citrixPackage.link,
+                                    encoding: null,
+                                    method: "GET",
+                                    headers: {
+                                        "Content-Type": "application/zip"
+                                    }
+                                };
+                                var vsixFile = await rp(requestOptions);
+                                if ( vsixFile == null )
+                                {
+                                    //inform user of error
+                                    vscode.window.showErrorMessage('Unable to download selected script package. Please verify the feed url is up to date.')
+                                    return;
+                                }
+                                else
+                                {
+                                    //save file to disk
+                                    fs.writeFileSync(tempFilePath,vsixFile);
+                                }
+                            }
+
+                            let zip = new admzip(tempFilePath);
+                                
+                            zip.extractAllTo(`${context.extensionPath}/`,true);
+                            fs.unlinkSync(tempFilePath);
+                            
+                            //load the manifest file to get the name and description
+                            //read the manifest file
+                            var baseName = path.basename(tempFilePath,'.vsix');
+                            const manifestFile = `${context.extensionPath}/packages/${baseName}/manifest.json`;
+                            const manifest = jsonfile.readFileSync(manifestFile);
+                            console.log(manifest.packageName);
+                
+                            vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
+
+                            powershellProvider.refreshPackages();
+                        });
+                    }
+                    else
+                    {
+                        vscode.window.showInformationMessage(`We are sorry, we could not find any Citrix script packages in the RSS feed sources you have configured. Please review your Citrix script packages feeds and try again.`);
+                    }
+                    break;
+                default:
+                    break;
             }
-        })
-        .then( (file) => {
-            const admzip = require('adm-zip');
-            var fileName = path.basename(file[0].fsPath);
-            var ext = path.extname(fileName);
-            var baseName = path.basename(file[0].fsPath,'.vsix');
-            //copy file first
-            
-            cfs(file[0].fsPath,`${context.extensionPath}/packages/${baseName}.zip`);
-            var zip = new admzip(`${context.extensionPath}/packages/${baseName}.zip`);
-            
-            zip.extractAllTo(`${context.extensionPath}/`,true);
-            fs.unlinkSync(`${context.extensionPath}/packages/${baseName}.zip`);
-            
-            //load the manifest file to get the name and description
-            //read the manifest file
-            const manifestFile = `${context.extensionPath}/packages/${baseName}/manifest.json`;
-            const manifest = jsonfile.readFileSync(manifestFile);
-            console.log(manifest.packageName);
-
-            vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
-
-            
-            powershellProvider.refreshPackages();
         });
+
     })
     
     let scriptClickCmd = vscode.commands.registerCommand('citrix.commands.loadscript', (scriptObj) => {
-        console.log(scriptObj.location);
-        // vscode.commands.executeCommand()
-        
         vscode.workspace.openTextDocument(scriptObj.location)
         .then((doc) => {
             vscode.window.showTextDocument(doc);
