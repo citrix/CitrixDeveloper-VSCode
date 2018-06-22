@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -50,6 +50,11 @@
                         "type": "string",
                         "default": "",
                         "description": "Base directory when cloning Citrix open source GitHub repositories"
+                    },
+                    "citrixdeveloper.vsixrepositories": {
+                        "type": "array",
+                        "default": "",
+                        "description": "A list of locations where Citrix script package .vsix files are located."
                     }
                 }
             }
@@ -214,6 +219,9 @@
         "fs-extra": "^6.0.1",
         "git-clone": "^0.1.0",
         "jsonfile": "^4.0.0",
-        "make-dir": "^1.3.0"
+        "make-dir": "^1.3.0",
+        "request": "^2.87.0",
+        "request-promise": "^4.2.2",
+        "rss-parser": "^3.1.4"
     }
 }
