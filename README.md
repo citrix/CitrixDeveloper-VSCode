@@ -8,7 +8,16 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 
 ## Features
 
-### Implemented in this release
+### Implemented in this release (1.4.1)
+
+- Settings to specify a RSS feed to list Citrix Script Packages
+- Install Citrix Script package from a configured RSS source.
+![](images/vscode-update141.png)
+
+#### Video Tutorial
+[![Citrix Developer Extension Update to include script feeds](https://img.youtube.com/vi/DZ4CcWIyT-Y/0.jpg)](https://www.youtube.com/watch?v=DZ4CcWIyT-Y)
+
+### Implemented in this release (1.3.0)
 
 - Powershell Provider
 - Script package installer
