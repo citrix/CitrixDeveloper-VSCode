@@ -8,6 +8,10 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 
 ## Features
 
+### Implemented in this release (1.4.2)
+
+- Change the title of the "Citrix Community Scripts" to "Community Scripts" to encourage that this is for all types of community scripts, not just Citrix. If you build a script package, no matter what platform it targets, it will be surfaced here.
+
 ### Implemented in this release (1.4.1)
 
 - Settings to specify a RSS feed to list Citrix Script Packages
