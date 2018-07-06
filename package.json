@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -80,7 +80,7 @@
                 },
                 {
                     "id": "citrix.view.citrix-scripts",
-                    "name": "Citrix Community Scripts"
+                    "name": "Community Scripts"
                 }
             ]
         },
