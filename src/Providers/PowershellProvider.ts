@@ -86,48 +86,61 @@ export class PowershellProvider implements vscode.TreeDataProvider<PowershellNod
     }
     private getRootPSTemplates()
     {
-        console.log(`${this.context.extensionPath}/packages/`);
-        
+        //console.log(`${this.context.extensionPath}/packages/`);
+        var homedir = require('os').homedir();
+        var citrixHomeDir = path.normalize(`${homedir}/.citrix`);
+        var citrixPackagesDir = `${citrixHomeDir}/packages`;
         let psTemplates = new Array<PowershellNode>();
 
-        var templateDirs = fs.readdirSync(`${this.context.extensionPath}/packages`);
-        templateDirs.forEach(templateDir => {
-            var stat = fs.statSync(`${this.context.extensionPath}/packages/${templateDir}`);
-            if ( stat.isDirectory() )
-            {
-                var dirLocation = `${this.context.extensionPath}/packages/${templateDir}`;
-                let psNode = new PowershellNode();
-                psNode.contextValue = "scriptpackage";
-                let psObject = new PowershellDocument(templateDir,dirLocation,[]);
-                psNode.iconPath = 
+        var templateDirs = null;
+        try 
+        {
+            templateDirs = fs.readdirSync(citrixPackagesDir);
+        } 
+        catch (error) 
+        {
+           //error 
+        }
+        
+        if ( templateDirs != null )
+        {
+            templateDirs.forEach(templateDir => {
+                var stat = fs.statSync(`${citrixHomeDir}/packages/${templateDir}`);
+                if ( stat.isDirectory() )
                 {
-                    light: this.context.asAbsolutePath("media/package.svg"),
-                    dark: this.context.asAbsolutePath("media/package.svg")
-                }
-                
-                psNode.context = this.context;
-                psNode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
-                psNode.label = templateDir;
-                //get children files
-                var childFiles = fs.readdirSync(dirLocation);
-                let children = Array<PowershellDocument>();
-
-                childFiles.forEach(childFile => {
-                    var baseName = path.basename(`${this.context.extensionPath}/packages/${templateDir}/${childFile}`);
-                    if ( baseName != 'manifest.json')
+                    var dirLocation = `${citrixHomeDir}/packages/${templateDir}`;
+                    let psNode = new PowershellNode();
+                    psNode.contextValue = "scriptpackage";
+                    let psObject = new PowershellDocument(templateDir,dirLocation,[]);
+                    psNode.iconPath = 
                     {
-                        console.log(baseName);
-                        var fileLocation = `${this.context.extensionPath}/packages/${templateDir}/${baseName}`;
-                        let childPsDoc = new PowershellDocument(baseName,fileLocation,[]);
-                        children.push(childPsDoc);
-                    } 
-                });
-                psObject.children = children;
-                psNode.PSDoc = psObject;
-                psTemplates.push(psNode);
-            }
-        });
+                        light: this.context.asAbsolutePath("media/package.svg"),
+                        dark: this.context.asAbsolutePath("media/package.svg")
+                    }
+                    
+                    psNode.context = this.context;
+                    psNode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
+                    psNode.label = templateDir;
+                    //get children files
+                    var childFiles = fs.readdirSync(dirLocation);
+                    let children = Array<PowershellDocument>();
 
+                    childFiles.forEach(childFile => {
+                        var baseName = path.basename(`${citrixHomeDir}/packages/${templateDir}/${childFile}`);
+                        if ( baseName != 'manifest.json')
+                        {
+                            console.log(baseName);
+                            var fileLocation = `${citrixHomeDir}/packages/${templateDir}/${baseName}`;
+                            let childPsDoc = new PowershellDocument(baseName,fileLocation,[]);
+                            children.push(childPsDoc);
+                        } 
+                    });
+                    psObject.children = children;
+                    psNode.PSDoc = psObject;
+                    psTemplates.push(psNode);
+                }
+            });
+        }
         return psTemplates;
     }
 
