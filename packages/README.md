@@ -1,1 +1,0 @@
-# This is where citrix script packages will be loaded
