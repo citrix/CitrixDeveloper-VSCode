@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "1.4.2",
+    "version": "1.5.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -154,6 +154,10 @@
             {
                 "command": "citrix.commands.context.deletepackage",
                 "title": "Delete Package"
+            },
+            {
+                "command": "citrix.commands.context.addpstoproject",
+                "title": "Add script to project"
             }
         ],
         "menus": {
@@ -194,6 +198,16 @@
                     "command": "citrix.commands.context.deletepackage",
                     "group": "citrixScriptPackageContext",
                     "when": "view == citrix.view.citrix-scripts && viewItem == scriptpackage"
+                },
+                {
+                    "command": "citrix.commands.context.addpstoproject",
+                    "group": "citrixScriptPackageContext",
+                    "when": "view == citrix.view.citrix-scripts && viewItem == scriptfile"
+                },
+                {
+                    "command": "citrix.commands.installpackage",
+                    "group": "citrixScriptPackageContext",
+                    "when": "view == citrix.view.citrix-scripts"
                 }
             ]
         }
@@ -206,10 +220,10 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.5.2",
         "mocha": "^5.2.0",
-        "typescript": "^2.5.2",
+        "typescript": "^2.9.2",
         "vscode": "^1.1.18"
     },
     "dependencies": {
