@@ -12,12 +12,12 @@ import { PowershellProvider } from './Providers/PowershellProvider';
 const cfs = require ('fs-copy-file-sync');
 const jsonfile = require('jsonfile');
 import * as fse from 'fs-extra';
-import { mkdirSync } from 'fs';
+import * as fs from 'fs';
 import { URL } from 'url';
 import { ScriptPackage } from './QuickPickItems/ScriptPackage';
 let Parser = require('rss-parser');
 let parser = new Parser();
-const fs = require('fs');
+// const fs = require('fs');
 var os = require('os');
 const admzip = require('adm-zip');
 import * as rp from 'request-promise';
@@ -25,17 +25,59 @@ import * as rp from 'request-promise';
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
     const sdkDocProvider = new SDKDocsProvider(context);
     vscode.window.registerTreeDataProvider('citrix.view.citrix-sdk-documentation',sdkDocProvider);
     
     const githubProvider = new GithubProjectProvider(context);
     vscode.window.registerTreeDataProvider('citrix.view.citrix-github-explorer',githubProvider);
 
-    //test dynamic tree provider
     const powershellProvider = new PowershellProvider(context);
     vscode.window.registerTreeDataProvider('citrix.view.citrix-scripts',powershellProvider);
-    //endtest
+
+    var oldPackageDir = `${context.extensionPath}/packages`;
+    
+    if ( fs.existsSync(oldPackageDir))
+    {
+        var oldTemplateDirs = fs.readdirSync(oldPackageDir);
+
+        if ( oldTemplateDirs.length > 0)
+        {
+            vscode.window.showInformationMessage('We have moved the templates to a different location from version 1.5.1 and above. We can help you migrate your script packages, would you like to us to migrate your packages for you?',
+            ...['Yes', 'No'])
+            .then(answer => {
+                if ( answer.toLowerCase() === 'yes')
+                {
+                    try
+                    {
+                        //copy the whole packages directory over.
+                        fse.copySync(oldPackageDir,templateDir);
+
+                        //delete the old packages folder.
+                        fse.removeSync(oldPackageDir);
+
+                        //refresh list.
+                        powershellProvider.refreshPackages();
+                    }
+                    catch ( copyError )
+                    {
+                        //inform the user
+                        vscode.window.showErrorMessage(`Unable to migrate script packages. Error message: ${copyError}`)
+                    }
+                }
+            });
+        }
+    }
+
+    //create the base template directory in the home citrix
+    //call .citrix
+    var homedir = require('os').homedir();
+    var templateDir = path.normalize(`${homedir}/.citrix/packages`);
+
+    if ( !fs.existsSync(templateDir) )
+    {
+        fs.mkdirSync(templateDir);
+    }
+
     vscode.commands.registerCommand('citrix.commands.downloaddockersfsample', () => {
         const terminal: vscode.Terminal = vscode.window.createTerminal('Docker');
         terminal.show();
@@ -200,17 +242,21 @@ export function activate(context: vscode.ExtensionContext) {
                         var fileName = path.basename(file[0].fsPath);
                         var ext = path.extname(fileName);
                         var baseName = path.basename(file[0].fsPath,'.vsix');
+                        
+                        var homedir = require('os').homedir();
+                        var citrixHomeDir = path.normalize(`${homedir}/.citrix`);
+                        
                         //copy file first
                         
-                        cfs(file[0].fsPath,`${context.extensionPath}/packages/${baseName}.zip`);
-                        var zip = new admzip(`${context.extensionPath}/packages/${baseName}.zip`);
+                        cfs(file[0].fsPath,`${citrixHomeDir}/packages/${baseName}.zip`);
+                        var zip = new admzip(`${citrixHomeDir}/packages/${baseName}.zip`);
                         
-                        zip.extractAllTo(`${context.extensionPath}/`,true);
-                        fs.unlinkSync(`${context.extensionPath}/packages/${baseName}.zip`);
+                        zip.extractAllTo(`${citrixHomeDir}/`,true);
+                        fs.unlinkSync(`${citrixHomeDir}/packages/${baseName}.zip`);
                         
                         //load the manifest file to get the name and description
                         //read the manifest file
-                        const manifestFile = `${context.extensionPath}/packages/${baseName}/manifest.json`;
+                        const manifestFile = `${citrixHomeDir}/packages/${baseName}/manifest.json`;
                         const manifest = jsonfile.readFileSync(manifestFile);
                         console.log(manifest.packageName);
             
@@ -271,13 +317,17 @@ export function activate(context: vscode.ExtensionContext) {
                     if ( availablePackages.length > 0)
                     {
                         vscode.window.showQuickPick(availablePackages).then(async citrixPackage => {
-                            let tempFilePath = path.normalize(`${context.extensionPath}/packages/${path.basename(citrixPackage.link)}`);
+                            var homedir = require('os').homedir();
+                            var citrixHomeDir = path.normalize(`${homedir}/.citrix`);
+                    
+                            let tempFilePath = path.normalize(`${citrixHomeDir}/${path.basename(citrixPackage.link)}`);
+
+                            var vsixFile = null;
 
                             if ( citrixPackage.link.toLowerCase().indexOf('file://') != -1 )
                             {
                                 var fileUrl = new URL(citrixPackage.link);
-                                
-                                fs.copyFileSync(fileUrl,tempFilePath);
+                                vsixFile = fs.readFileSync(fileUrl);                                
                             }
                             else
                             {
@@ -289,31 +339,33 @@ export function activate(context: vscode.ExtensionContext) {
                                         "Content-Type": "application/zip"
                                     }
                                 };
-                                var vsixFile = await rp(requestOptions);
-                                if ( vsixFile == null )
-                                {
-                                    //inform user of error
-                                    vscode.window.showErrorMessage('Unable to download selected script package. Please verify the feed url is up to date.')
-                                    return;
-                                }
-                                else
-                                {
-                                    //save file to disk
-                                    fs.writeFileSync(tempFilePath,vsixFile);
-                                }
+
+                                vsixFile = await rp(requestOptions);
                             }
+                            
+                            if ( vsixFile === null )
+                            {
+                                //inform user of error
+                                vscode.window.showErrorMessage('Unable to download selected script package. Please verify the feed url is up to date.')
+                                return;
+                            }
+                            else
+                            {
+                                //save file to disk
+                                fs.writeFileSync(tempFilePath,vsixFile);
+                            }
+                        
 
                             let zip = new admzip(tempFilePath);
                                 
-                            zip.extractAllTo(`${context.extensionPath}/`,true);
+                            zip.extractAllTo(`${citrixHomeDir}/`,true);
                             fs.unlinkSync(tempFilePath);
                             
                             //load the manifest file to get the name and description
                             //read the manifest file
                             var baseName = path.basename(tempFilePath,'.vsix');
-                            const manifestFile = `${context.extensionPath}/packages/${baseName}/manifest.json`;
+                            const manifestFile = `${citrixHomeDir}/packages/${baseName}/manifest.json`;
                             const manifest = jsonfile.readFileSync(manifestFile);
-                            console.log(manifest.packageName);
                 
                             vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
 
@@ -333,10 +385,34 @@ export function activate(context: vscode.ExtensionContext) {
     })
     
     let scriptClickCmd = vscode.commands.registerCommand('citrix.commands.loadscript', (scriptObj) => {
-        vscode.workspace.openTextDocument(scriptObj.location)
-        .then((doc) => {
-            vscode.window.showTextDocument(doc);
-        });        
+        //ask the user if they would like to add the script to the current working
+        //folder. If yes then copy the template file into the working folder.
+        //if no then just open the text document        
+        vscode.window.showInformationMessage('Would you like to add this file to your open workspace?',...['Yes','No'])
+        .then((answer) => {
+            if ( answer.toLowerCase() === 'yes')
+            {
+                var workspaceFolders = vscode.workspace.workspaceFolders;
+                if ( workspaceFolders != undefined )
+                {
+                    var workspaceFolder = workspaceFolders[0];
+                    var newFilePath = `${workspaceFolder.uri.fsPath}/${scriptObj.name}`
+                    
+                    fse.copySync(`${scriptObj.location}`, newFilePath);
+                }
+                else
+                {
+                    vscode.window.showWarningMessage('You need to have a folder open before you can copy the file to your working workspace. Please open a folder then try again.');
+                }
+            }
+            else
+            {
+                vscode.workspace.openTextDocument(scriptObj.location)
+                .then((doc) => {
+                    vscode.window.showTextDocument(doc);
+                });  
+            }
+        });
     });
     let openGithubRepo = vscode.commands.registerCommand('citrix.commands.context.openghsite', RepoInfo => {
         const uri = vscode.Uri.parse(RepoInfo.Project.projectURL);
@@ -446,7 +522,6 @@ export function activate(context: vscode.ExtensionContext) {
         {
             //stop cpx container.
             let pickableContainers = await Helpers.listRunningCitrixContainers();
-            console.log(pickableContainers);
             if ( pickableContainers.length > 0)
             {
                 vscode.window.showQuickPick(pickableContainers).then( async (output ) => {
@@ -482,6 +557,10 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage(`Citrix package ${viewItem.PSDoc.name} deleted`);
     });
 
+    let addScriptFileToProjectCmd = vscode.commands.registerCommand('citrix.commands.context.addpstoproject', (viewItem) => {
+        console.log(viewItem);
+    });
+
     context.subscriptions.push(openDeveloperSiteCmd);
     context.subscriptions.push(openDeveloperFeedbackSiteCmd);
     context.subscriptions.push(openSDKDocCmd);
@@ -489,4 +568,5 @@ export function activate(context: vscode.ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+
 }
