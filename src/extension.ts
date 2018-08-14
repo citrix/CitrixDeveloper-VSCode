@@ -8,7 +8,6 @@ import * as Helpers from './helpers/docker';
 import { SDKDocsProvider } from './Providers/SDKDocsProvider';
 import { GithubProjectProvider } from './Providers/GithubProjectProvider';
 import * as path from 'path';
-import { PowershellProvider } from './Providers/PowershellProvider';
 const cfs = require ('fs-copy-file-sync');
 const jsonfile = require('jsonfile');
 import * as fse from 'fs-extra';
@@ -21,6 +20,8 @@ let parser = new Parser();
 var os = require('os');
 const admzip = require('adm-zip');
 import * as rp from 'request-promise';
+import { ScriptProvider } from './Providers/ScriptProvider';
+import { ScriptNode } from './Model/Script/ScriptNode';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -31,8 +32,10 @@ export function activate(context: vscode.ExtensionContext) {
     const githubProvider = new GithubProjectProvider(context);
     vscode.window.registerTreeDataProvider('citrix.view.citrix-github-explorer',githubProvider);
 
-    const powershellProvider = new PowershellProvider(context);
-    vscode.window.registerTreeDataProvider('citrix.view.citrix-scripts',powershellProvider);
+    //testing
+    const scriptProvider = new ScriptProvider(context);
+    vscode.window.registerTreeDataProvider('citrix.view.citrix-scripts',scriptProvider);
+    //end of testing
 
     var oldPackageDir = `${context.extensionPath}/packages`;
     
@@ -56,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
                         fse.removeSync(oldPackageDir);
 
                         //refresh list.
-                        powershellProvider.refreshPackages();
+                        scriptProvider.refreshPackages();
                     }
                     catch ( copyError )
                     {
@@ -262,7 +265,7 @@ export function activate(context: vscode.ExtensionContext) {
             
                         vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
 
-                        powershellProvider.refreshPackages();
+                        scriptProvider.refreshPackages();
                     });
                     break;
                 case 'select package from configured sources':
@@ -369,7 +372,7 @@ export function activate(context: vscode.ExtensionContext) {
                 
                             vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
 
-                            powershellProvider.refreshPackages();
+                            scriptProvider.refreshPackages();
                         });
                     }
                     else
@@ -384,7 +387,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     })
     
-    let scriptClickCmd = vscode.commands.registerCommand('citrix.commands.loadscript', (scriptObj) => {
+    let scriptClickCmd = vscode.commands.registerCommand('citrix.commands.loadscript', (scriptObj: ScriptNode) => {
         //ask the user if they would like to add the script to the current working
         //folder. If yes then copy the template file into the working folder.
         //if no then just open the text document        
@@ -396,9 +399,9 @@ export function activate(context: vscode.ExtensionContext) {
                 if ( workspaceFolders != undefined )
                 {
                     var workspaceFolder = workspaceFolders[0];
-                    var newFilePath = `${workspaceFolder.uri.fsPath}/${scriptObj.name}`
+                    var newFilePath = `${workspaceFolder.uri.fsPath}/${scriptObj.label}`
                     
-                    fse.copySync(`${scriptObj.location}`, newFilePath);
+                    fse.copySync(`${scriptObj.path}`, newFilePath);
                 }
                 else
                 {
@@ -407,7 +410,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
             else
             {
-                vscode.workspace.openTextDocument(scriptObj.location)
+                vscode.workspace.openTextDocument(scriptObj.path)
                 .then((doc) => {
                     vscode.window.showTextDocument(doc);
                 });  
@@ -553,7 +556,7 @@ export function activate(context: vscode.ExtensionContext) {
         console.log(viewItem.PSDoc.location);
         fse.removeSync(viewItem.PSDoc.location);
         //need to inform the user that the package was deleted
-        powershellProvider.refreshPackages();
+        scriptProvider.refreshPackages();
         vscode.window.showInformationMessage(`Citrix package ${viewItem.PSDoc.name} deleted`);
     });
 
