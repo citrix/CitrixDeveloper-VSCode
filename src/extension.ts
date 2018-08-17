@@ -552,12 +552,11 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    let deletePackageCmd = vscode.commands.registerCommand('citrix.commands.context.deletepackage', (viewItem) => {
-        console.log(viewItem.PSDoc.location);
-        fse.removeSync(viewItem.PSDoc.location);
+    let deletePackageCmd = vscode.commands.registerCommand('citrix.commands.context.deletepackage', (viewItem: ScriptNode) => {
+        fse.removeSync(path.normalize(viewItem.path));
         //need to inform the user that the package was deleted
         scriptProvider.refreshPackages();
-        vscode.window.showInformationMessage(`Citrix package ${viewItem.PSDoc.name} deleted`);
+        vscode.window.showInformationMessage(`Citrix package ${viewItem.label} deleted`);
     });
 
     let addScriptFileToProjectCmd = vscode.commands.registerCommand('citrix.commands.context.addpstoproject', (viewItem) => {
