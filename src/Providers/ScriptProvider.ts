@@ -5,8 +5,9 @@ import * as fs from 'fs'
 
 export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
 {
-    onDidChangeTreeData?: vscode.Event<ScriptNode>;    
+
     private _onDidChangeTreeData: vscode.EventEmitter<any | null | undefined> = new vscode.EventEmitter<any | null | undefined>();
+    onDidChangeTreeData?: vscode.Event<ScriptNode> = this._onDidChangeTreeData.event; 
 
     getTreeItem(element: ScriptNode): vscode.TreeItem | Thenable<vscode.TreeItem> {
         return element;
@@ -61,11 +62,7 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
                     scriptNode.label = templateDir;
                     scriptNode.path = dirLocation;
                     scriptNode.contextValue = "scriptpackage";
-                    scriptNode.iconPath = 
-                    {
-                        light: this.context.asAbsolutePath("media/folder-scripts.svg"),
-                        dark: this.context.asAbsolutePath("media/folder-scripts.svg")
-                    }
+                    scriptNode.iconPath = this.context.asAbsolutePath("media/folder-scripts.svg");
                     
                     //scriptNode.context = this.context;
                     scriptNode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
@@ -94,11 +91,7 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
             if ( stat.isDirectory() )
             {
                 scriptNode.contextValue = "scriptfolder";
-                scriptNode.iconPath = 
-                {
-                    light: this.context.asAbsolutePath("media/folder-src.svg"),
-                    dark: this.context.asAbsolutePath("media/folder-src.svg")
-                }
+                scriptNode.iconPath = this.context.asAbsolutePath("media/folder-src.svg");
                 
                 scriptNode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
             }
@@ -106,20 +99,41 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
             {
                 scriptNode.contextValue = "scriptitem";
                 scriptNode.collapsibleState = vscode.TreeItemCollapsibleState.None;
-                scriptNode.iconPath = vscode.ThemeIcon.File;
+                scriptNode.iconPath = 
+                {
+                    light: this.getIcon(path.extname(scriptNode.path)),
+                    dark: this.getIcon(path.extname(scriptNode.path))
+                }
 
                 //set the command
                 scriptNode.command = { command:'citrix.commands.loadscript',arguments:[scriptNode],title:''};
             }
 
             children.push(scriptNode);
-            // var baseName = path.basename(`${citrixHomeDir}/packages/${templateDir}/${childFile}`);
-            // console.log(baseName);  
         });
 
         return children;
     }
-
+    public getIcon(ext: string):string
+    {
+        switch ( ext.toLowerCase())
+        {
+            case '.md':
+            case '.markdown':
+                return this.context.asAbsolutePath('media/markdown.svg');
+            case '.js':
+                return this.context.asAbsolutePath('media/javascript.svg');
+            case '.ps1':
+            case '.psm1':
+                return this.context.asAbsolutePath('media/powershell.svg');
+            case '.go':
+                return this.context.asAbsolutePath('media/go.svg');
+            case '.json':
+                return this.context.asAbsolutePath('media/json.svg');
+            default:
+                return this.context.asAbsolutePath('media/document.svg');            
+        }
+    }
     public refreshPackages()
     {
         this._onDidChangeTreeData.fire();
