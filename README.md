@@ -8,6 +8,12 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 
 ## Features
 
+### Implemented in this release (1.6.0)
+- Ability to show community scripts that have a folder structure in them. This allows the script packagers to create a single script will multiple product folder within it.  
+![](images/communityscripts-tree.png)
+
+- Also updated the citrix-script-packager as well to coinscide with this release. Please refer to that [repository](https://github.com/citrix/citrix-script-packager) for more information.
+
 ### Implemented in this release (1.4.2)
 
 - Change the title of the "Citrix Community Scripts" to "Community Scripts" to encourage that this is for all types of community scripts, not just Citrix. If you build a script package, no matter what platform it targets, it will be surfaced here.
