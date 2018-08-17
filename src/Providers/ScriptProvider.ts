@@ -108,8 +108,10 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
                 //set the command
                 scriptNode.command = { command:'citrix.commands.loadscript',arguments:[scriptNode],title:''};
             }
-
-            children.push(scriptNode);
+            if ( childFile.toLowerCase() != 'manifest.json')
+            {
+                children.push(scriptNode);
+            }
         });
 
         return children;
