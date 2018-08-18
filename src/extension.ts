@@ -12,11 +12,10 @@ const cfs = require ('fs-copy-file-sync');
 const jsonfile = require('jsonfile');
 import * as fse from 'fs-extra';
 import * as fs from 'fs';
-import { URL } from 'url';
+import * as url from 'url';
 import { ScriptPackage } from './QuickPickItems/ScriptPackage';
 let Parser = require('rss-parser');
 let parser = new Parser();
-// const fs = require('fs');
 var os = require('os');
 const admzip = require('adm-zip');
 import * as rp from 'request-promise';
@@ -284,7 +283,7 @@ export function activate(context: vscode.ExtensionContext) {
                         if ( repo.toLowerCase().indexOf('file:') != -1 )
                         {
                             //file url
-                            let fileUrl = new URL(repo);
+                            let fileUrl = new url.URL(repo);
                             rssContents = fs.readFileSync(fileUrl,'utf8');
                         }
                         else
@@ -322,14 +321,17 @@ export function activate(context: vscode.ExtensionContext) {
                         vscode.window.showQuickPick(availablePackages).then(async citrixPackage => {
                             var homedir = require('os').homedir();
                             var citrixHomeDir = path.normalize(`${homedir}/.citrix`);
-                    
-                            let tempFilePath = path.normalize(`${citrixHomeDir}/${path.basename(citrixPackage.link)}`);
+                            let vsixUrl = new url.URL(citrixPackage.link);
+                            let vsixUrlFormatted = url.format(vsixUrl,{fragment: false, search: false});
+                            console.log(vsixUrlFormatted);
+                            
+                            let tempFilePath = path.normalize(`${citrixHomeDir}/${path.basename(vsixUrlFormatted)}`);
 
                             var vsixFile = null;
 
                             if ( citrixPackage.link.toLowerCase().indexOf('file://') != -1 )
                             {
-                                var fileUrl = new URL(citrixPackage.link);
+                                var fileUrl = new url.URL(citrixPackage.link);
                                 vsixFile = fs.readFileSync(fileUrl);                                
                             }
                             else
@@ -358,21 +360,28 @@ export function activate(context: vscode.ExtensionContext) {
                                 fs.writeFileSync(tempFilePath,vsixFile);
                             }
                         
-
-                            let zip = new admzip(tempFilePath);
+                            try
+                            {
+                                let zip = new admzip(tempFilePath);
+                                    
+                                zip.extractAllTo(`${citrixHomeDir}/`,true);
+                                fs.unlinkSync(tempFilePath);
                                 
-                            zip.extractAllTo(`${citrixHomeDir}/`,true);
-                            fs.unlinkSync(tempFilePath);
-                            
-                            //load the manifest file to get the name and description
-                            //read the manifest file
-                            var baseName = path.basename(tempFilePath,'.vsix');
-                            const manifestFile = `${citrixHomeDir}/packages/${baseName}/manifest.json`;
-                            const manifest = jsonfile.readFileSync(manifestFile);
-                
-                            vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
+                                //load the manifest file to get the name and description
+                                //read the manifest file
+                                var baseName = path.basename(tempFilePath,'.vsix');
+                                const manifestFile = `${citrixHomeDir}/packages/${baseName}/manifest.json`;
+                                const manifest = jsonfile.readFileSync(manifestFile);
+                    
+                                vscode.window.showInformationMessage(`Installed Citrix script package ${manifest.packageName}.`)
 
-                            scriptProvider.refreshPackages();
+                                scriptProvider.refreshPackages();
+                            }
+                            catch ( extractError )
+                            {
+                                vscode.window.showErrorMessage('Unable to extract selected script package.')
+                            }
+                            
                         });
                     }
                     else

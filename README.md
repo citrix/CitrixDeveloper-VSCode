@@ -8,6 +8,10 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 
 ## Features
 
+### Implemented in this release (1.6.1)
+
+- Added the ability to consume RSS feed abd VSIX package hosted in a github repository
+
 ### Implemented in this release (1.6.0)
 - Ability to show community scripts that have a folder structure in them. This allows the script packagers to create a single script will multiple product folder within it.  
 ![](images/communityscripts-tree.png)
