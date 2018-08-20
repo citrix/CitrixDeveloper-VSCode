@@ -77,7 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     if ( !fs.existsSync(templateDir) )
     {
-        fs.mkdirSync(templateDir);
+        fse.mkdirpSync(templateDir);
     }
 
     vscode.commands.registerCommand('citrix.commands.downloaddockersfsample', () => {
