@@ -8,6 +8,11 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 
 ## Features
 
+### Implemented in this release (1.6.2)
+
+- Bug fixed for recursive directory creation on windows.
+    * credit to [RyanCButler](http://www.twitter.com/Ryan_C_Butler) for identifing this bug.
+
 ### Implemented in this release (1.6.1)
 
 - Added the ability to consume RSS feed abd VSIX package hosted in a github repository
