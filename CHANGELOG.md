@@ -5,7 +5,7 @@ Release Notes for Citrix Developer Extension for Visual Studio Code
 
 ## Index
 
-- [1.6.2](#162)
+- [1.6.2 - 19th August, 2018](#162---19th-August-2018)
 - [1.6.1](#161)
 - [1.6.0 - 17th August, 2018](#160---17th-August-2018)
 - [1.4.2](#142)
@@ -17,10 +17,10 @@ Release Notes for Citrix Developer Extension for Visual Studio Code
 - [0.6.0](#060)
 - [0.5.0 - 7th October, 2017](#050---7th-October-2017)
 
-### 1.6.2
+### 1.6.2 - 19th August, 2018
 
 - Bug fixed for recursive directory creation on windows.
-  - credit to [RyanCButler](https://github.com/ryancbutler) [twitter](http://www.twitter.com/Ryan_C_Butler) for identifying this bug.
+  - credit to [RyanCButler](https://github.com/ryancbutler) ([twitter](http://www.twitter.com/Ryan_C_Butler)) for identifying this bug.
 
 ### 1.6.1
 
