@@ -5,20 +5,17 @@ Release Notes for Citrix Developer Extension for Visual Studio Code
 
 ## Index
 
-- [CHANGE LOG](#CHANGE-LOG)
-  - [Index](#Index)
-    - [1.6.2](#162)
-    - [1.6.1](#161)
-    - [1.6.0 - 17th August, 2018](#160---17th-August-2018)
-    - [1.4.2](#142)
-    - [1.4.1 - 22nd June, 2018](#141---22nd-June-2018)
-      - [Video Tutorial](#Video-Tutorial)
-    - [1.3.0 - 24th May, 2018](#130---24th-May-2018)
-    - [1.2.0](#120)
-    - [1.0.0 - 1st May, 2018](#100---1st-May-2018)
-    - [0.7.0](#070)
-    - [0.6.0](#060)
-    - [0.5.0 - 7th October, 2017](#050---7th-October-2017)
+- [1.6.2](#162)
+- [1.6.1](#161)
+- [1.6.0 - 17th August, 2018](#160---17th-August-2018)
+- [1.4.2](#142)
+- [1.4.1 - 22nd June, 2018](#141---22nd-June-2018)
+- [1.3.0 - 24th May, 2018](#130---24th-May-2018)
+- [1.2.0](#120)
+- [1.0.0 - 1st May, 2018](#100---1st-May-2018)
+- [0.7.0](#070)
+- [0.6.0](#060)
+- [0.5.0 - 7th October, 2017](#050---7th-October-2017)
 
 ### 1.6.2
 
