@@ -20,7 +20,7 @@ Release Notes for Citrix Developer Extension for Visual Studio Code
 ### 1.6.2
 
 - Bug fixed for recursive directory creation on windows.
-  - credit to [RyanCButler](http://www.twitter.com/Ryan_C_Butler) for identifying this bug.
+  - credit to [RyanCButler](https://github.com/ryancbutler) [twitter](http://www.twitter.com/Ryan_C_Butler) for identifying this bug.
 
 ### 1.6.1
 

@@ -12,7 +12,7 @@ Install and open Visual Studio Code. Press Ctrl+Shift+X or Cmd+Shift+X to open t
 
 ## Feedback
 
-We are always interested in your feedback. You can either use our Github [issues](issues) or our [UserVoice](http://www.tinyurl.com/citrixuservoice) site for logging issues or requesting features. We monitor both. If you would like to contact us directly you can use twitter [@citrixdeveloper](https://www.twitter.com/citrixdeveloper) or [@johnmcbride](http://www.twitter.com/johnmcbride)
+We are always interested in your feedback. Please submit New [issues](issues) for logging issues or requesting features. We monitor both. If you would like to contact us directly you can use twitter [@citrixdeveloper](https://www.twitter.com/citrixdeveloper) or [@johnmcbride](http://www.twitter.com/johnmcbride)
 
 ## Roadmap
 
