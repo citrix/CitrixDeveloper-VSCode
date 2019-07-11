@@ -5,5 +5,11 @@
     },
     "search.exclude": {
         "out": true // set this to false to include "out" folder in search results
-    }
+    },
+    // Custom spelling library for streetsidesoftware.code-spell-checker extension
+    "cSpell.words": [
+        "Netscaler",
+        "Roadmap",
+        "kanban"
+    ]
 }
