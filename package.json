@@ -133,6 +133,7 @@
             {
                 "command": "citrix.commands.context.openghsite",
                 "title": "Goto GitHub site",
+                "category": "Citrix",
                 "icon": {
                     "light": "media/githubmark-light.png",
                     "dark": "media/githubmark-dark.png"
@@ -144,6 +145,7 @@
             },
             {
                 "command": "citrix.commands.context.openprojectissues",
+                "category": "Citrix",
                 "title": "Goto Github Issues"
             },
             {
@@ -153,10 +155,12 @@
             },
             {
                 "command": "citrix.commands.context.deletepackage",
+                "category": "Citrix",
                 "title": "Delete Package"
             },
             {
                 "command": "citrix.commands.context.addpstoproject",
+                "category": "Citrix",
                 "title": "Add script to project"
             }
         ],
