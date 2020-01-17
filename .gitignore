@@ -2,5 +2,7 @@
 out
 node_modules
 
+#exclude yarn.lock
+yarn.lock
 #extensions to ignore
 *.vsix
