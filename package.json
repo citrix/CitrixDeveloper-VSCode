@@ -38,7 +38,8 @@
         "onCommand:citrix.commands.context.openghsite",
         "onCommand:citrix.commands.context.openprojectsite",
         "onCommand:citrix.commands.context.openprojectissues",
-        "onCommand:citrix.commands.installpackage"
+        "onCommand:citrix.commands.installpackage",
+        "onCommand:citrix.commands.listsamples"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -162,6 +163,11 @@
                 "command": "citrix.commands.context.addpstoproject",
                 "category": "Citrix",
                 "title": "Add script to project"
+            },
+            {
+                "command": "citrix.commands.listsamples",
+                "category": "Citrix",
+                "title": "Samples"
             }
         ],
         "menus": {
@@ -231,13 +237,18 @@
         "vscode": "^1.1.36"
     },
     "dependencies": {
+        "@types/adm-zip": "^0.4.32",
+        "@types/find": "^0.2.1",
         "adm-zip": "^0.4.13",
         "dockerode": "^2.5.8",
+        "find": "^0.3.0",
         "fs-copy-file-sync": "^1.1.1",
         "fs-extra": "^8.1.0",
         "git-clone": "^0.1.0",
         "jsonfile": "^5.0.0",
         "make-dir": "^3.0.0",
+        "replace": "^1.1.5",
+        "replace-in-file": "^5.0.2",
         "request": "^2.88.0",
         "request-promise": "^4.2.4",
         "rss-parser": "^3.7.2"
