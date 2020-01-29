@@ -1,0 +1,9 @@
+{
+    "prompts":[],
+    "fileNamesToReplace":[
+        {
+            "regex":"Template-",
+            "replacement":"{plugin-name}"
+        }
+    ]
+}
