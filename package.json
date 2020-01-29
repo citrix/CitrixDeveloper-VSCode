@@ -2,7 +2,7 @@
     "name": "citrixdeveloper-vscode",
     "displayName": "Citrix Developer tools for Visual Studio Code",
     "description": "Tooling, samples and sdk documentation to help you get with building Citrix enabled applications.",
-    "version": "1.6.2",
+    "version": "1.7.0",
     "publisher": "CitrixDeveloper",
     "contributors": [
         "John McBride"
@@ -17,7 +17,7 @@
         "url": "https://github.com/citrix/CitrixDeveloper-VSCode.git"
     },
     "engines": {
-        "vscode": "^1.24.0"
+        "vscode": "^1.41.0"
     },
     "categories": [
         "Other",
@@ -234,11 +234,12 @@
         "@types/node": "^12.6.9",
         "mocha": "^6.2.0",
         "typescript": "^3.5.3",
-        "vscode": "^1.1.36"
+        "vscode": "^1.1.36",
+        "@types/adm-zip": "^0.4.32",
+        "@types/find": "^0.2.1"
     },
     "dependencies": {
-        "@types/adm-zip": "^0.4.32",
-        "@types/find": "^0.2.1",
+
         "adm-zip": "^0.4.13",
         "dockerode": "^2.5.8",
         "find": "^0.3.0",
@@ -247,7 +248,6 @@
         "git-clone": "^0.1.0",
         "jsonfile": "^5.0.0",
         "make-dir": "^3.0.0",
-        "replace": "^1.1.5",
         "replace-in-file": "^5.0.2",
         "request": "^2.88.0",
         "request-promise": "^4.2.4",
