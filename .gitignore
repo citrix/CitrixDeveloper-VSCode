@@ -4,5 +4,6 @@ node_modules
 
 #exclude yarn.lock
 yarn.lock
+yarn-error.log
 #extensions to ignore
 *.vsix
