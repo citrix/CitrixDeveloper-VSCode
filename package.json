@@ -65,7 +65,7 @@
                 {
                     "id": "citrix-explorer-citrix",
                     "title": "Citrix Developer",
-                    "icon": "media/VSCodeIcon.svg"
+                    "icon": "media/VSCodeIcon.png"
                 }
             ]
         },
@@ -90,16 +90,16 @@
                 "command": "citrix.commands.openCitrixDeveloperSite",
                 "title": "Open Developer Site",
                 "icon": {
-                    "light": "media/devsite-light.svg",
-                    "dark": "media/devsite-dark.svg"
+                    "light": "media/devsite-light.png",
+                    "dark": "media/devsite-dark.png"
                 }
             },
             {
                 "command": "citrix.commands.openCitrixDeveloperFeedbackSite",
                 "title": "Give us feedback!",
                 "icon": {
-                    "light": "media/feedback-light.svg",
-                    "dark": "media/feedback-dark.svg"
+                    "light": "media/feedback-light.png",
+                    "dark": "media/feedback-dark.png"
                 }
             },
             {
