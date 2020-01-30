@@ -8,16 +8,31 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 
 ## Features
 
+### Implement in this release (1.7.0)
+
+- Implemented new project template system so that this extension can host project templates for users to create.
+
+- Added Citrix Director plugin project template. This is available from the command pallet.
+![](images/plugindemo-1.gif)
+
+- Citrix Director Project Template
+
+    - Custom build tasks in Visual Studio code for the following. These are located in the tasks.json file
+        
+        - Building project via the command pallet -> Build.
+
+        - Packaging plugin into a deployment file via the command pallet -> Tasks option.
+
 ### Implemented in this release (1.6.2)
 
 - Bug fixed for recursive directory creation on windows.
     * credit to [RyanCButler](http://www.twitter.com/Ryan_C_Butler) for identifing this bug.
 
-### Implemented in this release (1.6.1)
+### Implemented in release (1.6.1)
 
 - Added the ability to consume RSS feed abd VSIX package hosted in a github repository
 
-### Implemented in this release (1.6.0)
+### Implemented in release (1.6.0)
 - Ability to show community scripts that have a folder structure in them. This allows the script packagers to create a single script will multiple product folder within it.  
 ![](images/communityscripts-tree.png)
 
