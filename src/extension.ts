@@ -707,7 +707,7 @@ export function activate(context: vscode.ExtensionContext) {
 		} //end of else for workspace folders check
 		
 	}); // end of the command event
-
+    context.subscriptions.push(createProjectFromTemplateCmd);
     context.subscriptions.push(openDeveloperSiteCmd);
     context.subscriptions.push(openDeveloperFeedbackSiteCmd);
     context.subscriptions.push(openSDKDocCmd);
