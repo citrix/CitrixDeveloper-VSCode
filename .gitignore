@@ -1,6 +1,7 @@
 #folder to ignore
 out
 node_modules
+dist
 
 #exclude yarn.lock
 yarn.lock
