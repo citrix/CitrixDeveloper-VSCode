@@ -41,7 +41,7 @@
         "onCommand:citrix.commands.installpackage",
         "onCommand:citrix.commands.listsamples"
     ],
-    "main": "./out/src/extension",
+    "main": "./dist/extension",
     "contributes": {
         "configuration": [
             {
@@ -223,23 +223,24 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+        "vscode:prepublish": "webpack --mode production",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --watch",
+        "test-compile": "tsc -p ./"
     },
     "devDependencies": {
+        "@types/adm-zip": "^0.4.32",
+        "@types/find": "^0.2.1",
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.6.9",
         "mocha": "^6.2.0",
+        "ts-loader": "^6.2.1",
         "typescript": "^3.5.3",
         "vscode": "^1.1.36",
-        "@types/adm-zip": "^0.4.32",
-        "@types/find": "^0.2.1"
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.3.10"
     },
     "dependencies": {
-
         "adm-zip": "^0.4.13",
         "dockerode": "^2.5.8",
         "find": "^0.3.0",
@@ -248,6 +249,7 @@
         "git-clone": "^0.1.0",
         "jsonfile": "^5.0.0",
         "make-dir": "^3.0.0",
+        "original-fs": "^1.1.0",
         "replace-in-file": "^5.0.2",
         "request": "^2.88.0",
         "request-promise": "^4.2.4",
