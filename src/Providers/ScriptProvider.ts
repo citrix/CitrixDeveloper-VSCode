@@ -62,7 +62,7 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
                     scriptNode.label = templateDir;
                     scriptNode.path = dirLocation;
                     scriptNode.contextValue = "scriptpackage";
-                    scriptNode.iconPath = this.context.asAbsolutePath("media/folder-scripts.svg");
+                    scriptNode.iconPath = this.context.asAbsolutePath("media/folder-scripts.png");
                     
                     //scriptNode.context = this.context;
                     scriptNode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
@@ -91,7 +91,7 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
             if ( stat.isDirectory() )
             {
                 scriptNode.contextValue = "scriptfolder";
-                scriptNode.iconPath = this.context.asAbsolutePath("media/folder-src.svg");
+                scriptNode.iconPath = this.context.asAbsolutePath("media/folder-src.png");
                 
                 scriptNode.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed;
             }
@@ -122,18 +122,18 @@ export class ScriptProvider implements vscode.TreeDataProvider<ScriptNode>
         {
             case '.md':
             case '.markdown':
-                return this.context.asAbsolutePath('media/markdown.svg');
+                return this.context.asAbsolutePath('media/markdown.png');
             case '.js':
-                return this.context.asAbsolutePath('media/javascript.svg');
+                return this.context.asAbsolutePath('media/javascript.png');
             case '.ps1':
             case '.psm1':
-                return this.context.asAbsolutePath('media/powershell.svg');
+                return this.context.asAbsolutePath('media/powershell.png');
             case '.go':
-                return this.context.asAbsolutePath('media/go.svg');
+                return this.context.asAbsolutePath('media/go.png');
             case '.json':
-                return this.context.asAbsolutePath('media/json.svg');
+                return this.context.asAbsolutePath('media/json.png');
             default:
-                return this.context.asAbsolutePath('media/document.svg');            
+                return this.context.asAbsolutePath('media/document.png');            
         }
     }
     public refreshPackages()
