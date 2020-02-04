@@ -592,7 +592,8 @@ export function activate(context: vscode.ExtensionContext) {
 			let directorPluginTemplate = new ProjectTemplate();
 			directorPluginTemplate.label = "Director Plugin Sample";
 			directorPluginTemplate.location = "templates/directorplugin";
-			directorPluginTemplate.templateZipFilename = "directorplugin.zip";
+            directorPluginTemplate.templateZipFilename = "directorplugin.zip";
+            
 			sampleTemplateProjects.push(directorPluginTemplate);
 	
 			var pickedTemplate = await vscode.window.showQuickPick(sampleTemplateProjects);			
@@ -606,10 +607,10 @@ export function activate(context: vscode.ExtensionContext) {
 			//the template developer can add any additional prompts by adding a
 			//prompts.json file to the template.
 			let projectName = await vscode.window.showInputBox({prompt:'What is your project name?',value:path.basename(vscode.workspace.workspaceFolders[0].name)});
-			let projectDesc = await vscode.window.showInputBox({prompt:'What is your porject description?'});
+			let projectDesc = await vscode.window.showInputBox({prompt:'What is your project description?'});
 
 			//get the prompts.json file for any user defined custom prompts
-			let templateInfoJSON = fs.readFileSync(`${extensionBaseFolder}/templates/director/templateinfo.json`).toString();
+			let templateInfoJSON = fs.readFileSync(path.normalize(`${extensionBaseFolder}/templates/directorplugin/templateinfo.json`)).toString();
 			
 			//convert the json into the 
 			let templateInfo = JSON.parse(templateInfoJSON);
@@ -657,9 +658,8 @@ export function activate(context: vscode.ExtensionContext) {
 			//extract template zip to opened folder
 			if ( pickedTemplate !== undefined)
 			{
-				let directorPluginZip = `${extensionBaseFolder}/${pickedTemplate.location}/${pickedTemplate.templateZipFilename}`;
-				// console.log(directorPluginZip);
-				let zip = new AdmZip(directorPluginZip);
+				let directorPluginZip = path.normalize(`${extensionBaseFolder}/${pickedTemplate.location}/${pickedTemplate.templateZipFilename}`);
+                let zip = new AdmZip(path.normalize(directorPluginZip));
 				if ( vscode.workspace.rootPath !== undefined)
 				{
 					await zip.extractAllTo(vscode.workspace.rootPath);
@@ -668,8 +668,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 			//rename director.plugin.template.csproj with the project folder name
 			fs.renameSync(
-				`${vscode.workspace.rootPath}/director.plugin.template.csproj`,
-				`${vscode.workspace.rootPath}/${projectName}.csproj`);
+				path.normalize(`${vscode.workspace.rootPath}/director.plugin.template.csproj`),
+				path.normalize(`${vscode.workspace.rootPath}/${projectName}.csproj`));
 
 			//change the file name
 			for (const fileInfo in templateInfo.fileNamesToReplace) {
