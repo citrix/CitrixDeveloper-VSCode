@@ -18,7 +18,7 @@ Citrix Developer tools for Visual Studio Code is an extension that helps develop
 - Citrix Director Project Template
 
     - Custom build tasks in Visual Studio code for the following. These are located in the tasks.json file
-        
+
         - Building project via the command pallet -> Build.
 
         - Packaging plugin into a deployment file via the command pallet -> Tasks option.
@@ -67,42 +67,19 @@ Install and open Visual Studio Code. Press Ctrl+Shift+X or Cmd+Shift+X to open t
 
 ## Feedback
 
-We are always interested in your feedback. You can either use our github issues or our [UserVoice](http://www.tinyurl.com/citrixuservoice) site for logging issues or requesting features. We monitor both. If you would to contact us directly you can use twitter [@citrixdeveloper](https://www.twitter.com/citrixdeveloper) or [@johnmcbride](http://www.twitter.com/johnmcbride)
+We are always interested in your feedback. Please submit New [issues](issues) for logging issues or requesting features. We monitor both. If you would like to contact us directly you can use twitter [@citrixdeveloper](https://www.twitter.com/citrixdeveloper) or [@johnmcbride](http://www.twitter.com/johnmcbride)
+
+## Roadmap
+
+For roadmap based items, we will be utilizing the "feature" tag within the project issues along with the [Kanban board](projects/1).
 
 ## Known Issues
 
-- Sites are open using the defaul browser. Would like to use the in-windows browser of VSCode.
+- Sites are open using the default browser. I would like to use the VSCode [Webview API](https://code.visualstudio.com/api/extension-guides/webview) instead.
+- See [issue 25](issues/25)
 - Samples not available yet.
 - Snippets not available yet.
 
-## Version Information
+## Release Notes
 
-### 1.3.0
-
-Added the ability for the user to install a vsix script package built by the community. Please see [the Citrix Script Package project on github](https://github.com/citrix/citrix-script-packager) for more information on how to build these packages.
-
-![Install script package](images/installpackage-cmd.png)
-
-![viewer](images/packageviewer.png)
-
-### 1.2.0
-
-Moved the citrix based explorer views out into a new activity bar.
-
-Added multiple explorer views into the citrix activity bar to include the SDK Documentation, community script and [Citrix based Github projects](https://www.github.com/citrix).
-
-![](images/explorerbar-main.png)
-
-### 0.7.0
-
-Refactored the explorer view. Changed name to "Citrix Developer" and added additional nodes for SDK Documentation and Github Projects.
-
-Added github features to the listed open source projects, such as clone from url, open issues and open project site. This is shown in the context menu of the github node.
-
-### 0.6.0
-
-Added Citrix Netscaler commands to the command palette for pulling/starting/stopping Netscaler CPX images.
-
-### 0.5.0
-
-Initial release of Citrix Developer Extension for Visual Studio Code.
+See [CHANGELOG](CHANGELOG.md)
