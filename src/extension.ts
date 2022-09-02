@@ -21,6 +21,10 @@ const admzip = require('adm-zip');
 import * as rp from 'request-promise';
 import { ScriptProvider } from './Providers/ScriptProvider';
 import { ScriptNode } from './Model/Script/ScriptNode';
+import { ProjectTemplate } from './QuickPickItems/ProjectTemplate';
+var replace = require('replace-in-file');
+import * as AdmZip from 'adm-zip';
+import * as find from 'find';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -426,6 +430,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
         });
     });
+
     let openGithubRepo = vscode.commands.registerCommand('citrix.commands.context.openghsite', RepoInfo => {
         const uri = vscode.Uri.parse(RepoInfo.Project.projectURL);
         vscode.commands.executeCommand('vscode.open', uri);
@@ -572,6 +577,137 @@ export function activate(context: vscode.ExtensionContext) {
         console.log(viewItem);
     });
 
+    //show a list of citrix samples/scaffolding projects
+    
+    let createProjectFromTemplateCmd = vscode.commands.registerCommand('citrix.commands.listsamples', async () => {
+		var sampleTemplateProjects:Array<ProjectTemplate> = new Array<ProjectTemplate>();
+		
+		if ( vscode.workspace.workspaceFolders === undefined)
+		{
+			vscode.window.showWarningMessage('To use the Citrix sample project templates you need to open a folder within VSCode');
+			// vscode.window.sshowOpenDialog();
+		}
+		else
+		{
+			let directorPluginTemplate = new ProjectTemplate();
+			directorPluginTemplate.label = "Director Plugin Sample";
+			directorPluginTemplate.location = "templates/directorplugin";
+            directorPluginTemplate.templateZipFilename = "directorplugin.zip";
+            
+			sampleTemplateProjects.push(directorPluginTemplate);
+	
+			var pickedTemplate = await vscode.window.showQuickPick(sampleTemplateProjects);			
+
+			//get the base extension default path
+			let extensionBaseFolder = context.extensionPath;
+
+			//all project templates will get two default prompts.
+			//	1. Project Name
+			//	2. Project Description.
+			//the template developer can add any additional prompts by adding a
+			//prompts.json file to the template.
+			let projectName = await vscode.window.showInputBox({prompt:'What is your project name?',value:path.basename(vscode.workspace.workspaceFolders[0].name)});
+			let projectDesc = await vscode.window.showInputBox({prompt:'What is your project description?'});
+
+			//get the prompts.json file for any user defined custom prompts
+			let templateInfoJSON = fs.readFileSync(path.normalize(`${extensionBaseFolder}/templates/directorplugin/templateinfo.json`)).toString();
+			
+			//convert the json into the 
+			let templateInfo = JSON.parse(templateInfoJSON);
+
+			let allPrompts: Array<KeyValuePair> = [];
+
+			//get prompts from the template info json file included with with
+			//each project template.
+			for (const prompt in templateInfo.prompts) {
+				if (templateInfo.prompts.hasOwnProperty(prompt)) {
+					const element = templateInfo.prompts[prompt];
+					//logging out the question
+					var userResponse = await vscode.window.showInputBox({prompt:element.title});
+					console.log(`${element.title}:${userResponse}`);
+
+					if ( userResponse !== undefined && element.replacementToken !== undefined)
+					{
+						let userAnswerInfo:KeyValuePair = {
+							answer: userResponse,
+							replacementToken: element.replacementToken
+						};
+						
+						allPrompts.push(userAnswerInfo);
+					}
+				}
+			}
+			
+			//parse through all the user defined prompts
+			for (const pluginPrompt in allPrompts) {
+				if (allPrompts.hasOwnProperty(pluginPrompt)) {
+					const element = allPrompts[pluginPrompt];
+					
+					let reg = new RegExp(`${element.replacementToken}`,'g');
+
+					const replaceOptions = {
+						files: `${vscode.workspace.rootPath}/**`,
+						from: reg,
+						to: `${element.answer}`
+					};
+					
+					const results = await replace(replaceOptions);
+				}
+			}
+
+			//extract template zip to opened folder
+			if ( pickedTemplate !== undefined)
+			{
+				let directorPluginZip = path.normalize(`${extensionBaseFolder}/${pickedTemplate.location}/${pickedTemplate.templateZipFilename}`);
+                let zip = new AdmZip(path.normalize(directorPluginZip));
+				if ( vscode.workspace.rootPath !== undefined)
+				{
+					await zip.extractAllTo(vscode.workspace.rootPath);
+				}
+			}
+
+			//rename director.plugin.template.csproj with the project folder name
+			fs.renameSync(
+				path.normalize(`${vscode.workspace.rootPath}/director.plugin.template.csproj`),
+				path.normalize(`${vscode.workspace.rootPath}/${projectName}.csproj`));
+
+			//change the file name
+			for (const fileInfo in templateInfo.fileNamesToReplace) {
+				console.log(fileInfo);
+				if (templateInfo.fileNamesToReplace.hasOwnProperty(fileInfo)) {
+					const element = templateInfo.fileNamesToReplace[fileInfo];
+					var findRegEx = new RegExp(element.regex);
+					let templateFiles = find.fileSync(findRegEx,`${vscode.workspace.rootPath}`);
+					console.log(templateFiles);
+					for (const templateFile in templateFiles) {
+						if (templateFiles.hasOwnProperty(templateFile)) {
+							const file = templateFiles[templateFile];
+							var dir = path.dirname(file);
+							if ( projectName !== undefined)
+							{
+								let newFile = file.replace(findRegEx,element.replacement).replace(element.replacement,projectName);
+								fs.renameSync(file,newFile);
+							}
+						}
+					}
+					
+					console.log(element);
+				}
+			}
+
+			//go through the predefined token replacement
+			const replaceOptions = {
+				files: `${vscode.workspace.rootPath}/**`,
+				from: /{plugin-name}/g,
+				to: projectName
+			};
+
+			const results = await replace(replaceOptions);
+
+		} //end of else for workspace folders check
+		
+	}); // end of the command event
+    context.subscriptions.push(createProjectFromTemplateCmd);
     context.subscriptions.push(openDeveloperSiteCmd);
     context.subscriptions.push(openDeveloperFeedbackSiteCmd);
     context.subscriptions.push(openSDKDocCmd);

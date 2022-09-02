@@ -69,8 +69,8 @@ export class SDKDocsProvider implements vscode.TreeDataProvider<SDKDocumentNode>
             sdkdocnode.label = element.title;
             sdkdocnode.doc = sdkdoc;
             sdkdocnode.iconPath = {
-            light: this.context.asAbsolutePath("media/SDKDoc-light.svg"),
-            dark: this.context.asAbsolutePath("media/SDKDoc-dark.svg")
+            light: this.context.asAbsolutePath("media/SDKDoc-light.png"),
+            dark: this.context.asAbsolutePath("media/SDKDoc-dark.png")
             };
             sdkdocnode.command = { command:'citrix.opensdkdocument',arguments:[sdkdoc.url],title:''};
             
@@ -92,8 +92,8 @@ export class SDKDocsProvider implements vscode.TreeDataProvider<SDKDocumentNode>
             sdkChildNode.doc = sdkChildDoc;
             sdkChildNode.label = element.title;
             sdkChildNode.iconPath = {
-                light: this.context.asAbsolutePath("media/SDKLine-light.svg"),
-                dark: this.context.asAbsolutePath("media/SDKLine-dark.svg")
+                light: this.context.asAbsolutePath("media/SDKLine-light.png"),
+                dark: this.context.asAbsolutePath("media/SDKLine-dark.png")
                 };
             
             sdkChildNode.command = { command:'citrix.opensdkdocument',arguments:[element.url],title:''};
